@@ -16,7 +16,7 @@ class AdhanAlarmReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
         val prayerName = intent.getStringExtra(EXTRA_PRAYER_NAME) ?: "Shalat"
-        val cityName = intent.getStringExtra(EXTRA_CITY_NAME) ?: "Arahku"
+        val cityName = intent.getStringExtra(EXTRA_CITY_NAME) ?: "arahku"
 
         showNotification(context, prayerName, cityName)
 

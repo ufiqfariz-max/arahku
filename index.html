@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Arahku - Jadwal Shalat, Arah Kiblat, Panduan Shalat & Astronomi</title>
-  <meta name="description" content="Arahku: Aplikasi Jadwal Shalat Offline, Panduan Shalat 5 Waktu Lengkap (Mozaik Inilah.com), Arah Kiblat, Doa Harian, Dzikir Pagi Petang & Sebelum Tidur, serta Buku Astronomi. Prodi Tadris Fisika UIN Syarif Hidayatullah Jakarta.">
+  <title>arahku - Jadwal Shalat, Arah Kiblat, Panduan Shalat & Astronomi</title>
+  <meta name="description" content="arahku: Aplikasi Jadwal Shalat Offline, Panduan Shalat 5 Waktu Lengkap (Mozaik Inilah.com), Arah Kiblat, Doa Harian, Dzikir Pagi Petang & Sebelum Tidur, serta Buku Astronomi. Prodi Tadris Fisika UIN Syarif Hidayatullah Jakarta.">
   <meta name="theme-color" content="#064e3b">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌙</text></svg>">
   
@@ -104,7 +104,7 @@
         <div>
           <div class="flex items-center space-x-2">
             <h1 class="text-xl font-bold tracking-tight text-white flex items-center gap-1.5">
-              Arahku <span class="text-xs px-2 py-0.5 rounded-full bg-gold-500/20 text-gold-300 border border-gold-400/30 font-medium">v2.0</span>
+              arahku <span class="text-xs px-2 py-0.5 rounded-full bg-gold-500/20 text-gold-300 border border-gold-400/30 font-medium">v3.0</span>
             </h1>
           </div>
           <p class="text-xs text-brand-200/90 font-medium">Prodi Tadris Fisika UIN Syarif Hidayatullah Jakarta</p>
@@ -113,7 +113,7 @@
 
       <!-- Action Buttons -->
       <div class="flex items-center space-x-2">
-        <a href="#download-apk" class="hidden sm:inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-brand-950 font-semibold text-xs transition shadow">
+        <a href="arahku.apk" download="arahku-v3.0.apk" class="hidden sm:inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-brand-950 font-semibold text-xs transition shadow">
           <i data-lucide="download" class="w-4 h-4"></i>
           <span>Download APK</span>
         </a>
@@ -161,7 +161,7 @@
             Integrasi Sains Fisika & Ibadah Islam
           </span>
           <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">
-            Arahku: Panduan Ibadah & Falak Modern
+            arahku: Panduan Ibadah & Falak Modern
           </h2>
           <p class="text-sm text-brand-100/90 mt-1.5 max-w-2xl leading-relaxed">
             Dikembangkan oleh <strong>Program Studi Tadris Fisika UIN Syarif Hidayatullah Jakarta</strong>. Dilengkapi hisab astronomis waktu shalat, azimuth kiblat presisi, panduan shalat 5 waktu lengkap, dzikir pagi petang & sebelum tidur, serta buku referensi astronomi 12 bab.
@@ -249,24 +249,32 @@
             </p>
           </div>
 
-          <!-- Compass Dial -->
-          <div class="relative w-64 h-64 sm:w-72 sm:h-72 rounded-full border-4 border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 flex items-center justify-center shadow-inner my-2">
-            <!-- Degree markings -->
-            <div class="absolute inset-2 rounded-full border border-dashed border-slate-300 dark:border-slate-600"></div>
-            <span class="absolute top-2 text-xs font-bold text-red-500">U (0°)</span>
-            <span class="absolute right-3 text-xs font-bold text-slate-400">T (90°)</span>
-            <span class="absolute bottom-2 text-xs font-bold text-slate-400">S (180°)</span>
-            <span class="absolute left-3 text-xs font-bold text-slate-400">B (270°)</span>
+          <!-- Alignment Status Pill -->
+          <div id="qibla-status-pill" class="px-5 py-2.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs sm:text-sm font-bold flex items-center gap-2 mb-4 transition-all duration-300">
+            <span class="w-2.5 h-2.5 rounded-full bg-slate-400" id="qibla-status-dot"></span>
+            <span id="qibla-status-text">Posisikan ponsel mendatar & putar hingga jarum emas mengarah ke atas</span>
+          </div>
 
-            <!-- Ka'bah direction indicator -->
-            <div id="qibla-pointer" class="absolute w-full h-full flex items-center justify-center pointer-events-none compass-dial" style="transform: rotate(295deg);">
-              <div class="absolute -top-3 flex flex-col items-center">
-                <div class="px-2 py-0.5 rounded bg-emerald-600 text-[10px] text-white font-bold shadow mb-1">
-                  🕋 Ka'bah
+          <!-- Compass Dial Container -->
+          <div class="relative w-64 h-64 sm:w-72 sm:h-72 rounded-full border-4 border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 flex items-center justify-center shadow-inner my-2 overflow-hidden">
+            <!-- Rotating Dial Face (North, East, South, West) -->
+            <div id="compass-dial-face" class="absolute w-full h-full rounded-full flex items-center justify-center transition-transform duration-75">
+              <div class="absolute inset-2 rounded-full border border-dashed border-slate-300 dark:border-slate-600"></div>
+              <span class="absolute top-2 text-xs font-bold text-red-500">U (0°)</span>
+              <span class="absolute right-3 text-xs font-bold text-slate-400">T (90°)</span>
+              <span class="absolute bottom-2 text-xs font-bold text-slate-400">S (180°)</span>
+              <span class="absolute left-3 text-xs font-bold text-slate-400">B (270°)</span>
+
+              <!-- Ka'bah direction indicator pinned to geographic azimuth -->
+              <div id="qibla-pointer" class="absolute w-full h-full flex items-center justify-center pointer-events-none" style="transform: rotate(295deg);">
+                <div class="absolute -top-1 flex flex-col items-center">
+                  <div class="px-2 py-0.5 rounded bg-emerald-600 text-[10px] text-white font-bold shadow mb-1">
+                    🕋 Ka'bah
+                  </div>
+                  <div class="w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-b-[18px] border-b-gold-500"></div>
                 </div>
-                <div class="w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-b-[16px] border-b-emerald-600"></div>
+                <div class="w-1.5 h-32 bg-gradient-to-t from-transparent via-gold-400 to-gold-500"></div>
               </div>
-              <div class="w-1 h-32 bg-gradient-to-t from-transparent via-emerald-500 to-emerald-600"></div>
             </div>
 
             <!-- Compass Center Hub -->
@@ -279,27 +287,50 @@
             <div class="text-2xl font-extrabold text-brand-700 dark:text-brand-400 font-mono" id="qibla-angle-text">
               295.14° NW
             </div>
+            <div class="text-xs font-semibold text-slate-600 dark:text-slate-300" id="device-heading-text">
+              Arah Ponsel: Membaca sensor...
+            </div>
             <p class="text-xs text-slate-500 dark:text-slate-400" id="qibla-city-desc">
               Dari Kota Jakarta ke Ka'bah: ~7.915 km
             </p>
           </div>
         </div>
 
-        <!-- FORMULA & SENSOR INFO -->
+        <!-- SENSOR & KALIBRASI CONTROLS -->
         <div class="space-y-4">
-          <div class="bg-white dark:bg-slate-900 rounded-2xl p-5 shadow-sm border border-slate-200 dark:border-slate-800">
-            <h4 class="text-sm font-bold text-slate-800 dark:text-slate-100 flex items-center gap-1.5 mb-2">
-              <i data-lucide="cpu" class="w-4 h-4 text-brand-600"></i>
-              Deteksi Posisi & GPS
+          <div class="bg-white dark:bg-slate-900 rounded-2xl p-5 shadow-sm border border-slate-200 dark:border-slate-800 space-y-3">
+            <h4 class="text-sm font-bold text-slate-800 dark:text-slate-100 flex items-center gap-1.5">
+              <i data-lucide="compass" class="w-4 h-4 text-brand-600"></i>
+              Sensitivitas & Sensor Gerak Kompas
             </h4>
-            <p class="text-xs text-slate-600 dark:text-slate-400 mb-3 leading-relaxed">
-              Dapatkan azimuth kiblat presisi menggunakan koordinat GPS browser Anda secara real-time.
+            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+              Aktifkan pembacaan magnetometer & gyroscope ponsel agar jarum kompas berputar real-time mengikuti arah hadap HP Anda.
             </p>
-            <button id="btn-gps-qibla" onclick="getLocationAndCalculateQibla()" class="w-full flex items-center justify-center space-x-2 py-2.5 px-4 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold text-xs transition shadow-sm">
-              <i data-lucide="locate-fixed" class="w-4 h-4"></i>
-              <span>Gunakan Lokasi GPS Saya</span>
+            <button id="btn-start-compass" onclick="initCompassSensor()" class="w-full flex items-center justify-center space-x-2 py-2.5 px-4 rounded-xl bg-gold-500 hover:bg-gold-600 text-brand-950 font-bold text-xs transition shadow-sm">
+              <i data-lucide="zap" class="w-4 h-4"></i>
+              <span>Aktifkan Sensor Gerak HP (Kompas Real-Time)</span>
             </button>
-            <div id="gps-status" class="text-[11px] text-slate-500 mt-2 text-center"></div>
+            <div id="sensor-compass-status" class="text-[11px] text-slate-500 text-center">Sensor siap diaktifkan</div>
+
+            <hr class="border-slate-100 dark:border-slate-800 my-2">
+
+            <button id="btn-gps-qibla" onclick="getLocationAndCalculateQibla()" class="w-full flex items-center justify-center space-x-2 py-2 px-3 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-semibold text-xs transition">
+              <i data-lucide="locate-fixed" class="w-4 h-4 text-brand-600"></i>
+              <span>Perbarui Lokasi GPS Presisi</span>
+            </button>
+            <div id="gps-status" class="text-[11px] text-slate-500 text-center"></div>
+          </div>
+
+          <div class="bg-amber-50 dark:bg-slate-900 rounded-2xl p-4 border border-amber-200 dark:border-slate-800 space-y-2">
+            <h4 class="text-xs font-bold text-amber-900 dark:text-amber-400 flex items-center gap-1.5">
+              <i data-lucide="help-circle" class="w-4 h-4 text-amber-600"></i>
+              Tips Kalibrasi Jika Jarum Tidak Sensitif:
+            </h4>
+            <ul class="text-[11px] text-amber-800 dark:text-slate-300 space-y-1 list-disc list-inside">
+              <li><strong>Pola Angka 8:</strong> Gerakkan ponsel membentuk angka 8 di udara selama 3-5 detik untuk mengkalibrasi magnetometer internal.</li>
+              <li><strong>Jauhkan dari Logam:</strong> Casing bermagnet, laptop, atau powerbank dapat mengganggu sensor kompas.</li>
+              <li><strong>Pegang Mendatar:</strong> Posisikan ponsel horizontal sejajar lantai.</li>
+            </ul>
           </div>
 
           <div class="bg-brand-50 dark:bg-slate-900 rounded-2xl p-5 border border-brand-100 dark:border-slate-800">
@@ -425,13 +456,13 @@
             <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-brand-100 dark:bg-brand-900/60 text-brand-800 dark:text-brand-300">
               Google Play & Android APK
             </span>
-            <span class="text-xs text-slate-400">Versi 2.0 (Build 2)</span>
+            <span class="text-xs text-slate-400">Versi 3.0 (Build 3)</span>
           </div>
           <h3 class="text-xl font-bold text-slate-900 dark:text-white">
-            Unduh Aplikasi Arahku untuk Android
+            Unduh Aplikasi arahku untuk Android
           </h3>
           <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-xl leading-relaxed">
-            Aplikasi resmi Arahku dapat dipasang di smartphone Android Anda. Nikmati fitur kompas kiblat sensor magnetometer langsung, jadwal shalat otomatis berbasis GPS perangkat, serta audio adzan offline.
+            Aplikasi resmi arahku dapat dipasang di smartphone Android Anda. Nikmati fitur kompas kiblat sensor magnetometer langsung, jadwal shalat otomatis berbasis GPS perangkat, serta audio adzan offline.
           </p>
           <div class="text-xs text-slate-500 font-mono mt-1">
             Application ID: <span class="text-brand-600 dark:text-brand-400 font-bold">com.taufiq.arahku</span>
@@ -439,10 +470,10 @@
         </div>
 
         <div class="flex flex-col sm:flex-row items-center gap-3 shrink-0">
-          <button onclick="installOrDownloadAPK()" class="px-5 py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm shadow-md flex items-center space-x-2 transition">
+          <a href="arahku.apk" download="arahku-v3.0.apk" class="px-5 py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm shadow-md flex items-center space-x-2 transition">
             <i data-lucide="download" class="w-5 h-5"></i>
-            <span>Unduh File APK Android</span>
-          </button>
+            <span>Unduh File APK Android (v3.0)</span>
+          </a>
           <button onclick="promptPWA()" class="px-4 py-3 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-100 font-semibold text-sm transition flex items-center space-x-2">
             <i data-lucide="smartphone" class="w-4 h-4"></i>
             <span>Pasang ke Layar Utama (PWA)</span>
@@ -457,7 +488,7 @@
   <footer class="bg-brand-950 text-brand-200 border-t border-brand-900 py-8 px-4 mt-8">
     <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-xs">
       <div class="space-y-1 text-center md:text-left">
-        <p class="font-bold text-white text-sm">Arahku - Aplikasi Jadwal Shalat, Kiblat, Panduan Shalat & Astronomi</p>
+        <p class="font-bold text-white text-sm">arahku - Aplikasi Jadwal Shalat, Kiblat, Panduan Shalat & Astronomi</p>
         <p class="text-brand-300">Program Studi Tadris Fisika | Fakultas Ilmu Tarbiyah dan Keguruan</p>
         <p class="text-brand-400">Universitas Islam Negeri Syarif Hidayatullah Jakarta</p>
       </div>
@@ -1070,15 +1101,115 @@
       document.getElementById("countdown-timer").textContent = countdownStr;
     }
 
-    // ==================== QIBLA DISPLAY ====================
+    // ==================== LIVE QIBLA COMPASS & SENSOR ====================
+    let currentDeviceHeading = 0;
+    let activeQiblaAzimuth = 295.14;
+    let lastVibratedHeading = -1;
+
     function updateQiblaDisplay(customAngle, customDist, customName) {
-      const angle = customAngle !== undefined ? customAngle : currentCity.qibla;
+      activeQiblaAzimuth = customAngle !== undefined ? customAngle : currentCity.qibla;
       const dist = customDist !== undefined ? customDist : 7915;
       const name = customName || currentCity.name;
 
-      document.getElementById("qibla-angle-text").textContent = `${angle.toFixed(2)}° NW`;
+      document.getElementById("qibla-angle-text").textContent = `${activeQiblaAzimuth.toFixed(2)}° NW`;
       document.getElementById("qibla-city-desc").textContent = `Dari ${name} ke Ka'bah di Makkah: ~${dist.toLocaleString('id-ID')} km`;
-      document.getElementById("qibla-pointer").style.transform = `rotate(${angle}deg)`;
+      
+      const pointer = document.getElementById("qibla-pointer");
+      if (pointer) pointer.style.transform = `rotate(${activeQiblaAzimuth}deg)`;
+
+      updateLiveCompassAlignment();
+    }
+
+    function initCompassSensor() {
+      const sensorStatus = document.getElementById("sensor-compass-status");
+      if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
+        DeviceOrientationEvent.requestPermission()
+          .then(permissionState => {
+            if (permissionState === 'granted') {
+              startOrientationListener();
+            } else {
+              sensorStatus.textContent = "Izin sensor orientasi ditolak.";
+            }
+          })
+          .catch(err => {
+            sensorStatus.textContent = "Sensor: " + err.message;
+          });
+      } else {
+        startOrientationListener();
+      }
+    }
+
+    function startOrientationListener() {
+      const sensorStatus = document.getElementById("sensor-compass-status");
+      if (window.DeviceOrientationEvent) {
+        window.addEventListener('deviceorientationabsolute', handleDeviceOrientation, true);
+        window.addEventListener('deviceorientation', handleDeviceOrientation, true);
+        sensorStatus.innerHTML = "<span class='text-emerald-500 font-bold'>● Sensor Kompas Real-Time Aktif</span>";
+      } else {
+        sensorStatus.textContent = "Perangkat/Browser ini tidak memiliki sensor magnetometer.";
+      }
+    }
+
+    function handleDeviceOrientation(event) {
+      let heading = null;
+      if (event.webkitCompassHeading !== undefined && event.webkitCompassHeading !== null) {
+        heading = event.webkitCompassHeading;
+      } else if (event.alpha !== null && event.alpha !== undefined) {
+        heading = (360 - event.alpha) % 360;
+      }
+
+      if (heading !== null && !isNaN(heading)) {
+        currentDeviceHeading = heading;
+        const dialFace = document.getElementById("compass-dial-face");
+        if (dialFace) {
+          dialFace.style.transform = `rotate(${-heading}deg)`;
+        }
+
+        const headingLabel = document.getElementById("device-heading-text");
+        if (headingLabel) {
+          headingLabel.textContent = `Arah Ponsel: ${heading.toFixed(1)}° (${getCompassDirectionName(heading)})`;
+        }
+
+        updateLiveCompassAlignment();
+      }
+    }
+
+    function updateLiveCompassAlignment() {
+      const relativeAngle = ((activeQiblaAzimuth - currentDeviceHeading + 360) % 360);
+      const diff = relativeAngle > 180 ? 360 - relativeAngle : relativeAngle;
+      
+      const pill = document.getElementById("qibla-status-pill");
+      const dot = document.getElementById("qibla-status-dot");
+      const text = document.getElementById("qibla-status-text");
+
+      if (!pill || !dot || !text) return;
+
+      if (diff <= 3.5) {
+        pill.className = "px-5 py-2.5 rounded-full bg-emerald-600 text-white text-xs sm:text-sm font-bold flex items-center gap-2 mb-4 shadow-lg scale-105 transition-all duration-300";
+        dot.className = "w-3 h-3 rounded-full bg-gold-400 animate-ping";
+        text.textContent = "🎯 TEPAT MENGHADAP KA'BAH (KIBLAT)!";
+
+        if (navigator.vibrate && Math.abs(currentDeviceHeading - lastVibratedHeading) > 5) {
+          navigator.vibrate(80);
+          lastVibratedHeading = currentDeviceHeading;
+        }
+      } else {
+        pill.className = "px-5 py-2.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs sm:text-sm font-bold flex items-center gap-2 mb-4 transition-all duration-300";
+        dot.className = "w-2.5 h-2.5 rounded-full bg-gold-500";
+        text.textContent = `Putar ponsel ${relativeAngle < 180 ? 'ke kanan' : 'ke kiri'} sejauh ${diff.toFixed(0)}° hingga jarum emas ke atas`;
+      }
+    }
+
+    function getCompassDirectionName(deg) {
+      const d = (deg + 22.5) % 360;
+      if (d < 45) return "Utara";
+      if (d < 90) return "Timur Laut";
+      if (d < 135) return "Timur";
+      if (d < 180) return "Tenggara";
+      if (d < 225) return "Selatan";
+      if (d < 270) return "Barat Daya";
+      if (d < 315) return "Barat";
+      return "Barat Laut";
     }
 
     function getLocationAndCalculateQibla() {
@@ -1405,11 +1536,11 @@
     }
 
     function installOrDownloadAPK() {
-      alert("Aplikasi Arahku (Package: com.taufiq.arahku v2.0)\n\nUntuk mengunduh file APK langsung:\n1. Di AI Studio: Klik menu Settings/Export -> Export APK atau Download Project.\n2. Google Play Store: Aplikasi siap dipublikasikan via Google Play Console dengan ID 'com.taufiq.arahku'.");
+      alert("Aplikasi arahku (Package: com.taufiq.arahku v3.0)\n\nUntuk mengunduh file APK langsung:\n1. Di AI Studio: Klik menu Settings/Export -> Export APK atau Download Project.\n2. Google Play Store: Aplikasi siap dipublikasikan via Google Play Console dengan ID 'com.taufiq.arahku'.");
     }
 
     function promptPWA() {
-      alert("Panduan Pemasangan PWA:\n\n- Chrome / Edge di HP: Klik tombol menu (titik tiga) di kanan atas, lalu pilih 'Tambahkan ke Layar Utama' (Add to Home Screen).\n- Safari di iPhone: Klik tombol Share lalu pilih 'Add to Home Screen'.\n\nAplikasi Arahku akan terpasang layaknya aplikasi native di ponsel Anda!");
+      alert("Panduan Pemasangan PWA:\n\n- Chrome / Edge di HP: Klik tombol menu (titik tiga) di kanan atas, lalu pilih 'Tambahkan ke Layar Utama' (Add to Home Screen).\n- Safari di iPhone: Klik tombol Share lalu pilih 'Add to Home Screen'.\n\nAplikasi arahku akan terpasang layaknya aplikasi native di ponsel Anda!");
     }
   </script>
 </body>

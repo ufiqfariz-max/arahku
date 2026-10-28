@@ -56,12 +56,15 @@ class QiblaViewModel(application: Application) : AndroidViewModel(application) {
         calculateAndStartSensor()
     }
 
+    private var sensorJob: kotlinx.coroutines.Job? = null
+
     private fun calculateAndStartSensor() {
         val city = _currentCity.value
         val qiblaBearing = QiblaCalculator.calculateQiblaBearing(city.latitude, city.longitude)
         val distance = QiblaCalculator.calculateDistanceToKaabaKm(city.latitude, city.longitude)
 
-        viewModelScope.launch {
+        sensorJob?.cancel()
+        sensorJob = viewModelScope.launch {
             sensorManager.getCompassDataFlow().collect { sensorData ->
                 _hasSensors.value = sensorData.hasSensors
                 _isTilted.value = sensorData.isTilted
@@ -70,7 +73,7 @@ class QiblaViewModel(application: Application) : AndroidViewModel(application) {
                 // Sudut relatif jarum kiblat terhadap kepala smartphone
                 val relative = ((qiblaBearing - deviceAzimuth + 360f) % 360f)
 
-                // Dianggap menghadap kiblat jika perbedaan sudut dalam batas +/- 3 derajat
+                // Dianggap menghadap kiblat jika perbedaan sudut dalam batas +/- 3.5 derajat
                 val diffFromZero = if (relative > 180f) 360f - relative else relative
                 val isFacing = diffFromZero <= 3.5f
 

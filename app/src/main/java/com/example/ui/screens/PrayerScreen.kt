@@ -55,7 +55,7 @@ fun PrayerScreen(
                             horizontalArrangement = Arrangement.spacedBy(6.dp)
                         ) {
                             Text(
-                                text = "Arahku",
+                                text = "arahku",
                                 style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
                             )
                             Surface(
@@ -843,7 +843,7 @@ fun ProdiIdentityDialog(onDismiss: () -> Unit) {
                 HorizontalDivider()
 
                 Text(
-                    text = "Tentang Aplikasi Arahku",
+                    text = "Tentang Aplikasi arahku",
                     style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold)
                 )
                 Text(

@@ -1,4 +1,4 @@
-# Arahku - Panduan Ibadah & Falak Modern
+# arahku - Panduan Ibadah & Falak Modern
 **Program Studi Tadris Fisika | Fakultas Ilmu Tarbiyah dan Keguruan**  
 **Universitas Islam Negeri (UIN) Syarif Hidayatullah Jakarta**
 
@@ -27,7 +27,7 @@ Aplikasi ini sudah dilengkapi dengan konfigurasi `vercel.json` dan aplikasi web 
    - Kunjungi [https://vercel.com](https://vercel.com) dan login menggunakan akun GitHub Anda.
 3. **Impor Proyek**:
    - Klik tombol **"Add New..."** -> **"Project"**.
-   - Pilih repository GitHub proyek **Arahku** Anda.
+   - Pilih repository GitHub proyek **arahku** Anda.
 4. **Deploy**:
    - Framework Preset: Pilih **"Other"** (Vercel otomatis mendeteksi file statis `index.html` dan `vercel.json`).
    - Root Directory: Biarkan default (`./`).
@@ -39,6 +39,6 @@ Aplikasi ini sudah dilengkapi dengan konfigurasi `vercel.json` dan aplikasi web 
 
 ## 📱 Publikasi Android (Google Play Console)
 - **Application ID:** `com.taufiq.arahku`
-- **Version Code:** `2`
-- **Version Name:** `2.0`
+- **Version Code:** `3`
+- **Version Name:** `3.0`
 - **Build Output:** APK / Android App Bundle (.aab) siap diunggah ke Google Play Console.

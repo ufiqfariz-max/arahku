@@ -22,6 +22,6 @@ dependencyResolutionManagement {
   }
 }
 
-rootProject.name = "Arahku"
+rootProject.name = "arahku"
 
 include(":app")

@@ -334,6 +334,44 @@ fun QiblaScreen(
                     }
                 }
             }
+
+            // Panduan Kalibrasi & Sensitivitas Sensor
+            item {
+                Card(
+                    shape = RoundedCornerShape(16.dp),
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.45f)
+                    ),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Column(
+                        modifier = Modifier.padding(16.dp),
+                        verticalArrangement = Arrangement.spacedBy(6.dp)
+                    ) {
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.AllInclusive,
+                                contentDescription = "Kalibrasi",
+                                tint = MaterialTheme.colorScheme.primary,
+                                modifier = Modifier.size(20.dp)
+                            )
+                            Text(
+                                text = "Tips Meningkatkan Sensitivitas Kompas",
+                                style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
+                                color = MaterialTheme.colorScheme.onSurface
+                            )
+                        }
+                        Text(
+                            text = "• Kalibrasi Angka 8: Gerakkan ponsel membentuk pola angka 8 di udara selama 3-5 detik jika jarum terasa kaku atau lambat berputar.\n• Bebaskan dari Magnet: Jauhkan dari casing magnetik, powerbank, atau permukaan logam tebal.\n• Posisi Datar: Pegang ponsel mendatar setinggi dada untuk pembacaan sudut paling sensitif dan akurat.",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                }
+            }
         }
     }
 
@@ -357,9 +395,22 @@ fun CompassDialCanvas(
     isFacingQibla: Boolean,
     modifier: Modifier = Modifier
 ) {
+    // Unwrapped continuous azimuth calculation to prevent 360-degree reverse spin
+    var lastTarget by remember { mutableFloatStateOf(deviceAzimuth) }
+    var unwrappedAzimuth by remember { mutableFloatStateOf(deviceAzimuth) }
+
+    LaunchedEffect(deviceAzimuth) {
+        var diff = (deviceAzimuth - lastTarget) % 360f
+        if (diff > 180f) diff -= 360f
+        if (diff < -180f) diff += 360f
+        unwrappedAzimuth += diff
+        lastTarget = deviceAzimuth
+    }
+
+    // High stiffness (800f) and optimal damping (0.7f) for ultra-sensitive, lag-free response
     val animatedAzimuth by animateFloatAsState(
-        targetValue = deviceAzimuth,
-        animationSpec = spring(dampingRatio = 0.75f, stiffness = 300f),
+        targetValue = unwrappedAzimuth,
+        animationSpec = spring(dampingRatio = 0.70f, stiffness = 850f),
         label = "azimuthAnim"
     )
 
