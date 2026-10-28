@@ -1,0 +1,1416 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Arahku - Jadwal Shalat, Arah Kiblat, Panduan Shalat & Astronomi</title>
+  <meta name="description" content="Arahku: Aplikasi Jadwal Shalat Offline, Panduan Shalat 5 Waktu Lengkap (Mozaik Inilah.com), Arah Kiblat, Doa Harian, Dzikir Pagi Petang & Sebelum Tidur, serta Buku Astronomi. Prodi Tadris Fisika UIN Syarif Hidayatullah Jakarta.">
+  <meta name="theme-color" content="#064e3b">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌙</text></svg>">
+  
+  <!-- Google Fonts: Amiri for Arabic, Plus Jakarta Sans for UI -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              200: '#a7f3d0',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+              800: '#065f46',
+              900: '#064e3b',
+              950: '#022c22',
+            },
+            gold: {
+              400: '#fbbf24',
+              500: '#f59e0b',
+              600: '#d97706',
+              700: '#b45309'
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            arabic: ['"Amiri"', 'serif']
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Lucide Icons with Reliable CDN and fallback -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.344.0/umd/lucide.min.js"></script>
+  <script>
+    if (typeof lucide === 'undefined') {
+      document.write('<script src="https://unpkg.com/lucide@latest"><\/script>');
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #f8fafc;
+      color: #1e293b;
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    }
+    .arabic-text {
+      font-family: 'Amiri', serif;
+      direction: rtl;
+      line-height: 2.2;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #334155;
+    }
+    .compass-dial {
+      transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+  </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 font-sans antialiased min-h-screen flex flex-col selection:bg-brand-500 selection:text-white">
+
+  <!-- TOP HEADER -->
+  <header class="sticky top-0 z-40 bg-brand-900/95 dark:bg-slate-900/95 backdrop-blur-md text-white border-b border-brand-800/60 shadow-md">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <!-- Logo Bulan Bintang -->
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-emerald-400 flex items-center justify-center shadow-lg border border-brand-400/30">
+          <svg class="w-6 h-6 text-gold-400" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12.3 2a10 10 0 0 0-1.9 20 10 10 0 0 0 9.1-5.9 1 1 0 0 0-1.2-1.3 8 8 0 1 1-7.3-12.8 1 1 0 0 0 1.3-1.2 10 10 0 0 0 0-1.2v2.4z"/>
+            <polygon points="19.5,4 20.7,6.5 23.5,6.9 21.5,8.8 22,11.5 19.5,10.2 17,11.5 17.5,8.8 15.5,6.9 18.3,6.5" fill="#facc15"/>
+          </svg>
+        </div>
+        <div>
+          <div class="flex items-center space-x-2">
+            <h1 class="text-xl font-bold tracking-tight text-white flex items-center gap-1.5">
+              Arahku <span class="text-xs px-2 py-0.5 rounded-full bg-gold-500/20 text-gold-300 border border-gold-400/30 font-medium">v2.0</span>
+            </h1>
+          </div>
+          <p class="text-xs text-brand-200/90 font-medium">Prodi Tadris Fisika UIN Syarif Hidayatullah Jakarta</p>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex items-center space-x-2">
+        <a href="#download-apk" class="hidden sm:inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-brand-950 font-semibold text-xs transition shadow">
+          <i data-lucide="download" class="w-4 h-4"></i>
+          <span>Download APK</span>
+        </a>
+        <button id="btn-theme-toggle" class="p-2 rounded-lg bg-brand-800/80 hover:bg-brand-700 text-brand-100 transition" title="Ganti Tema">
+          <i data-lucide="moon" class="w-4 h-4" id="theme-icon"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- NAVIGATION TABS -->
+    <nav class="max-w-6xl mx-auto px-2 flex space-x-1 overflow-x-auto custom-scrollbar border-t border-brand-800/40 text-xs sm:text-sm font-medium">
+      <button onclick="switchTab('jadwal')" class="nav-tab active flex items-center space-x-1.5 px-3.5 py-2.5 border-b-2 border-gold-400 text-gold-300 font-semibold whitespace-nowrap" data-target="jadwal">
+        <i data-lucide="clock" class="w-4 h-4"></i>
+        <span>Jadwal Shalat</span>
+      </button>
+      <button onclick="switchTab('kiblat')" class="nav-tab flex items-center space-x-1.5 px-3.5 py-2.5 border-b-2 border-transparent text-brand-200 hover:text-white whitespace-nowrap" data-target="kiblat">
+        <i data-lucide="compass" class="w-4 h-4"></i>
+        <span>Arah Kiblat</span>
+      </button>
+      <button onclick="switchTab('panduan')" class="nav-tab flex items-center space-x-1.5 px-3.5 py-2.5 border-b-2 border-transparent text-brand-200 hover:text-white whitespace-nowrap" data-target="panduan">
+        <i data-lucide="moon-star" class="w-4 h-4 text-gold-300"></i>
+        <span>Panduan Shalat</span>
+      </button>
+      <button onclick="switchTab('dzikir')" class="nav-tab flex items-center space-x-1.5 px-3.5 py-2.5 border-b-2 border-transparent text-brand-200 hover:text-white whitespace-nowrap" data-target="dzikir">
+        <i data-lucide="heart" class="w-4 h-4"></i>
+        <span>Dzikir & Doa</span>
+      </button>
+      <button onclick="switchTab('astronomi')" class="nav-tab flex items-center space-x-1.5 px-3.5 py-2.5 border-b-2 border-transparent text-brand-200 hover:text-white whitespace-nowrap" data-target="astronomi">
+        <i data-lucide="book-open" class="w-4 h-4"></i>
+        <span>Buku Astronomi</span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="flex-1 max-w-6xl w-full mx-auto p-4 sm:p-6 space-y-6">
+
+    <!-- HERO BANNER IDENTITAS -->
+    <section class="bg-gradient-to-r from-brand-900 via-brand-800 to-emerald-800 rounded-2xl p-5 sm:p-7 text-white shadow-xl relative overflow-hidden">
+      <div class="absolute -right-8 -bottom-8 w-44 h-44 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none"></div>
+      <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <span class="inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full bg-gold-500/20 text-gold-300 border border-gold-400/30 mb-2">
+            <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+            Integrasi Sains Fisika & Ibadah Islam
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">
+            Arahku: Panduan Ibadah & Falak Modern
+          </h2>
+          <p class="text-sm text-brand-100/90 mt-1.5 max-w-2xl leading-relaxed">
+            Dikembangkan oleh <strong>Program Studi Tadris Fisika UIN Syarif Hidayatullah Jakarta</strong>. Dilengkapi hisab astronomis waktu shalat, azimuth kiblat presisi, panduan shalat 5 waktu lengkap, dzikir pagi petang & sebelum tidur, serta buku referensi astronomi 12 bab.
+          </p>
+        </div>
+        <div class="flex items-center gap-2 self-start md:self-center shrink-0">
+          <div class="bg-white/10 backdrop-blur-md px-3.5 py-2 rounded-xl border border-white/10 text-center">
+            <span class="block text-xs text-brand-200">Package ID</span>
+            <span class="text-xs font-mono font-semibold text-gold-300">com.taufiq.arahku</span>
+          </div>
+          <div class="bg-white/10 backdrop-blur-md px-3.5 py-2 rounded-xl border border-white/10 text-center">
+            <span class="block text-xs text-brand-200">Status</span>
+            <span class="text-xs font-semibold text-emerald-300 flex items-center gap-1 justify-center">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Online
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 1: JADWAL SHALAT ==================== -->
+    <div id="tab-jadwal" class="tab-content space-y-6">
+      <!-- CITY SELECTOR & DATE -->
+      <div class="bg-white dark:bg-slate-900 p-4 sm:p-5 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="w-full sm:w-auto flex items-center space-x-3">
+          <div class="p-2.5 rounded-xl bg-brand-50 dark:bg-brand-950/60 text-brand-600 dark:text-brand-400 border border-brand-100 dark:border-brand-900">
+            <i data-lucide="map-pin" class="w-5 h-5"></i>
+          </div>
+          <div class="flex-1 sm:w-64">
+            <label for="city-select" class="block text-xs font-medium text-slate-500 dark:text-slate-400 mb-1">Pilih Kota di Indonesia</label>
+            <select id="city-select" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-100 rounded-lg px-3 py-2 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-brand-500">
+              <!-- Populated dynamically -->
+            </select>
+          </div>
+        </div>
+
+        <div class="flex items-center space-x-4 text-center sm:text-right">
+          <div>
+            <div id="masehi-date" class="text-sm font-bold text-slate-800 dark:text-slate-100">Memuat tanggal...</div>
+            <div id="hijri-date" class="text-xs text-brand-600 dark:text-brand-400 font-medium">1448 H / Penentuan Kalender Islam</div>
+          </div>
+          <div class="text-xl sm:text-2xl font-mono font-extrabold text-brand-700 dark:text-brand-400 bg-brand-50 dark:bg-brand-950/80 px-3 py-1.5 rounded-xl border border-brand-200 dark:border-brand-800/60" id="current-clock">
+            00:00:00
+          </div>
+        </div>
+      </div>
+
+      <!-- NEXT PRAYER COUNTDOWN CARD -->
+      <div class="bg-gradient-to-br from-emerald-600 via-brand-700 to-brand-900 rounded-2xl p-6 text-white shadow-lg relative overflow-hidden flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div class="space-y-1 text-center sm:text-left">
+          <span class="text-xs font-medium uppercase tracking-wider text-emerald-200/90">Waktu Shalat Berikutnya</span>
+          <h3 id="next-prayer-name" class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white flex items-center justify-center sm:justify-start gap-2">
+            <span>Dzuhur</span>
+            <span id="next-prayer-time" class="text-gold-300 font-mono text-2xl sm:text-3xl font-bold">(11:58 WIB)</span>
+          </h3>
+          <p class="text-xs text-brand-100/80">Kalkulasi hisab falak presisi untuk wilayah Indonesia</p>
+        </div>
+
+        <div class="bg-black/25 backdrop-blur-md px-6 py-4 rounded-xl border border-white/10 text-center min-w-[200px]">
+          <span class="text-xs text-emerald-200 block mb-1">Menuju Waktu Shalat</span>
+          <div id="countdown-timer" class="text-3xl font-mono font-black text-gold-300 tracking-wider">
+            --:--:--
+          </div>
+        </div>
+      </div>
+
+      <!-- PRAYER TIMES GRID -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3 sm:gap-4" id="prayer-cards-container">
+        <!-- Cards injected via JS (Imsak, Subuh, Terbit, Dhuha, Dzuhur, Ashar, Maghrib, Isya) -->
+      </div>
+    </div>
+
+    <!-- ==================== TAB 2: ARAH KIBLAT ==================== -->
+    <div id="tab-kiblat" class="tab-content hidden space-y-6">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- COMPASS DISPLAY -->
+        <div class="md:col-span-2 bg-white dark:bg-slate-900 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-800 flex flex-col items-center justify-center relative min-h-[420px]">
+          <div class="text-center mb-6">
+            <h3 class="text-lg font-bold text-slate-800 dark:text-slate-100 flex items-center justify-center gap-2">
+              <i data-lucide="compass" class="w-5 h-5 text-brand-600"></i>
+              Kalkulator & Kompas Arah Kiblat
+            </h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">
+              Menghitung azimuth lingkaran besar (Great Circle) menuju Ka'bah di Makkah (21.4225° N, 39.8262° E)
+            </p>
+          </div>
+
+          <!-- Compass Dial -->
+          <div class="relative w-64 h-64 sm:w-72 sm:h-72 rounded-full border-4 border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 flex items-center justify-center shadow-inner my-2">
+            <!-- Degree markings -->
+            <div class="absolute inset-2 rounded-full border border-dashed border-slate-300 dark:border-slate-600"></div>
+            <span class="absolute top-2 text-xs font-bold text-red-500">U (0°)</span>
+            <span class="absolute right-3 text-xs font-bold text-slate-400">T (90°)</span>
+            <span class="absolute bottom-2 text-xs font-bold text-slate-400">S (180°)</span>
+            <span class="absolute left-3 text-xs font-bold text-slate-400">B (270°)</span>
+
+            <!-- Ka'bah direction indicator -->
+            <div id="qibla-pointer" class="absolute w-full h-full flex items-center justify-center pointer-events-none compass-dial" style="transform: rotate(295deg);">
+              <div class="absolute -top-3 flex flex-col items-center">
+                <div class="px-2 py-0.5 rounded bg-emerald-600 text-[10px] text-white font-bold shadow mb-1">
+                  🕋 Ka'bah
+                </div>
+                <div class="w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-b-[16px] border-b-emerald-600"></div>
+              </div>
+              <div class="w-1 h-32 bg-gradient-to-t from-transparent via-emerald-500 to-emerald-600"></div>
+            </div>
+
+            <!-- Compass Center Hub -->
+            <div class="w-12 h-12 rounded-full bg-brand-900 text-gold-400 flex items-center justify-center font-bold text-xs shadow-md border-2 border-gold-400 z-10">
+              <i data-lucide="crosshair" class="w-5 h-5"></i>
+            </div>
+          </div>
+
+          <div class="text-center mt-4 space-y-1">
+            <div class="text-2xl font-extrabold text-brand-700 dark:text-brand-400 font-mono" id="qibla-angle-text">
+              295.14° NW
+            </div>
+            <p class="text-xs text-slate-500 dark:text-slate-400" id="qibla-city-desc">
+              Dari Kota Jakarta ke Ka'bah: ~7.915 km
+            </p>
+          </div>
+        </div>
+
+        <!-- FORMULA & SENSOR INFO -->
+        <div class="space-y-4">
+          <div class="bg-white dark:bg-slate-900 rounded-2xl p-5 shadow-sm border border-slate-200 dark:border-slate-800">
+            <h4 class="text-sm font-bold text-slate-800 dark:text-slate-100 flex items-center gap-1.5 mb-2">
+              <i data-lucide="cpu" class="w-4 h-4 text-brand-600"></i>
+              Deteksi Posisi & GPS
+            </h4>
+            <p class="text-xs text-slate-600 dark:text-slate-400 mb-3 leading-relaxed">
+              Dapatkan azimuth kiblat presisi menggunakan koordinat GPS browser Anda secara real-time.
+            </p>
+            <button id="btn-gps-qibla" onclick="getLocationAndCalculateQibla()" class="w-full flex items-center justify-center space-x-2 py-2.5 px-4 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold text-xs transition shadow-sm">
+              <i data-lucide="locate-fixed" class="w-4 h-4"></i>
+              <span>Gunakan Lokasi GPS Saya</span>
+            </button>
+            <div id="gps-status" class="text-[11px] text-slate-500 mt-2 text-center"></div>
+          </div>
+
+          <div class="bg-brand-50 dark:bg-slate-900 rounded-2xl p-5 border border-brand-100 dark:border-slate-800">
+            <h4 class="text-sm font-bold text-brand-900 dark:text-brand-300 flex items-center gap-1.5 mb-2">
+              <i data-lucide="binary" class="w-4 h-4 text-brand-600"></i>
+              Formula Spherical Trigonometry
+            </h4>
+            <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
+              Sudut azimuth kiblat $q$ dihitung menggunakan persamaan trigonometri bola astronomi:
+            </p>
+            <div class="bg-white dark:bg-slate-800 p-2.5 rounded-lg border border-brand-200 dark:border-slate-700 my-2 font-mono text-[11px] text-brand-800 dark:text-brand-300 overflow-x-auto">
+              tan q = sin Δλ / (cos φ · tan φ_K - sin φ · cos Δλ)
+            </div>
+            <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-normal">
+              φ = Lintang pengguna, λ = Bujur pengguna, φ_K = 21.4225° N, λ_K = 39.8262° E.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 3: PANDUAN SHALAT 5 WAKTU ==================== -->
+    <div id="tab-panduan" class="tab-content hidden space-y-6">
+      <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 dark:border-slate-800 pb-4">
+          <div>
+            <div class="flex items-center gap-2">
+              <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <span class="text-gold-500 text-xl">🌙⭐</span>
+                Panduan Shalat 5 Waktu Lengkap
+              </h3>
+            </div>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+              Referensi resmi: <strong>Mozaik Islam Inilah.com</strong> | Disusun bersama Prodi Tadris Fisika UIN Jakarta
+            </p>
+          </div>
+
+          <!-- Category filter -->
+          <div class="flex items-center space-x-1.5 overflow-x-auto custom-scrollbar">
+            <button onclick="filterPrayerGuide('all')" class="guide-filter-btn active px-3 py-1.5 rounded-lg bg-brand-600 text-white text-xs font-semibold whitespace-nowrap">Semua</button>
+            <button onclick="filterPrayerGuide('syarat')" class="guide-filter-btn px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-semibold whitespace-nowrap hover:bg-slate-200">Syarat & Rukun</button>
+            <button onclick="filterPrayerGuide('niat')" class="guide-filter-btn px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-semibold whitespace-nowrap hover:bg-slate-200">Niat 5 Waktu</button>
+            <button onclick="filterPrayerGuide('gerakan')" class="guide-filter-btn px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-semibold whitespace-nowrap hover:bg-slate-200">Bacaan Gerakan</button>
+          </div>
+        </div>
+
+        <!-- SEARCH INPUT -->
+        <div class="relative">
+          <i data-lucide="search" class="w-4 h-4 absolute left-3 top-3 text-slate-400"></i>
+          <input type="text" id="guide-search-input" oninput="searchPrayerGuide()" placeholder="Cari bacaan, niat, takbir, iftitah, ruku, sujud, tasyahud..." class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl pl-9 pr-4 py-2 text-xs sm:text-sm text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-brand-500">
+        </div>
+
+        <!-- ITEMS LIST CONTAINER -->
+        <div class="space-y-4" id="prayer-guide-container">
+          <!-- Injected via JavaScript -->
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 4: DZIKIR & DOA ==================== -->
+    <div id="tab-dzikir" class="tab-content hidden space-y-6">
+      <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 space-y-4">
+        <!-- Sub-tabs for Dzikir & Doa -->
+        <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3 flex-wrap gap-2">
+          <div class="flex space-x-2">
+            <button onclick="switchDzikirCategory('pagi')" class="dzikir-cat-btn active px-3.5 py-1.5 rounded-xl bg-brand-600 text-white text-xs font-bold" data-cat="pagi">
+              ☀️ Dzikir Pagi
+            </button>
+            <button onclick="switchDzikirCategory('petang')" class="dzikir-cat-btn px-3.5 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold" data-cat="petang">
+              🌇 Dzikir Petang
+            </button>
+            <button onclick="switchDzikirCategory('tidur')" class="dzikir-cat-btn px-3.5 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold" data-cat="tidur">
+              🌙 Sebelum Tidur
+            </button>
+            <button onclick="switchDzikirCategory('doa')" class="dzikir-cat-btn px-3.5 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold" data-cat="doa">
+              🤲 Doa Harian
+            </button>
+          </div>
+          <span class="text-xs text-slate-400 font-medium">Berdasarkan Al-Qur'an & As-Sunnah Ash-Shahihah</span>
+        </div>
+
+        <!-- DZIKIR LIST CONTAINER -->
+        <div class="space-y-4" id="dzikir-items-container">
+          <!-- Injected via JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 5: BUKU ASTRONOMI ==================== -->
+    <div id="tab-astronomi" class="tab-content hidden space-y-6">
+      <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200 dark:border-slate-800 pb-4">
+          <div>
+            <h3 class="text-lg font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2">
+              <i data-lucide="book-open" class="w-5 h-5 text-brand-600"></i>
+              Buku Astronomi Lengkap (Bab 1 s/d Bab 12)
+            </h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+              Referensi: <em>Buku Teks Astronomi</em> | Disusun untuk civitas akademika & masyarakat umum
+            </p>
+          </div>
+          <div class="w-full sm:w-64 relative">
+            <i data-lucide="search" class="w-4 h-4 absolute left-3 top-3 text-slate-400"></i>
+            <input type="text" id="astronomy-search" oninput="searchAstronomy()" placeholder="Cari materi astronomi..." class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl pl-9 pr-3 py-2 text-xs text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-brand-500">
+          </div>
+        </div>
+
+        <!-- CHAPTERS ACCORDION LIST -->
+        <div class="space-y-3" id="astronomy-chapters-container">
+          <div class="p-8 text-center text-slate-400">
+            <i data-lucide="loader-2" class="w-8 h-8 animate-spin mx-auto text-brand-500 mb-2"></i>
+            Memuat bab materi astronomi...
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DOWNLOAD APK & RELEASE INFO SECTION -->
+    <section id="download-apk" class="bg-white dark:bg-slate-900 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-800">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="space-y-2">
+          <div class="flex items-center space-x-2">
+            <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-brand-100 dark:bg-brand-900/60 text-brand-800 dark:text-brand-300">
+              Google Play & Android APK
+            </span>
+            <span class="text-xs text-slate-400">Versi 2.0 (Build 2)</span>
+          </div>
+          <h3 class="text-xl font-bold text-slate-900 dark:text-white">
+            Unduh Aplikasi Arahku untuk Android
+          </h3>
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-xl leading-relaxed">
+            Aplikasi resmi Arahku dapat dipasang di smartphone Android Anda. Nikmati fitur kompas kiblat sensor magnetometer langsung, jadwal shalat otomatis berbasis GPS perangkat, serta audio adzan offline.
+          </p>
+          <div class="text-xs text-slate-500 font-mono mt-1">
+            Application ID: <span class="text-brand-600 dark:text-brand-400 font-bold">com.taufiq.arahku</span>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row items-center gap-3 shrink-0">
+          <button onclick="installOrDownloadAPK()" class="px-5 py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm shadow-md flex items-center space-x-2 transition">
+            <i data-lucide="download" class="w-5 h-5"></i>
+            <span>Unduh File APK Android</span>
+          </button>
+          <button onclick="promptPWA()" class="px-4 py-3 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-100 font-semibold text-sm transition flex items-center space-x-2">
+            <i data-lucide="smartphone" class="w-4 h-4"></i>
+            <span>Pasang ke Layar Utama (PWA)</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-brand-950 text-brand-200 border-t border-brand-900 py-8 px-4 mt-8">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-xs">
+      <div class="space-y-1 text-center md:text-left">
+        <p class="font-bold text-white text-sm">Arahku - Aplikasi Jadwal Shalat, Kiblat, Panduan Shalat & Astronomi</p>
+        <p class="text-brand-300">Program Studi Tadris Fisika | Fakultas Ilmu Tarbiyah dan Keguruan</p>
+        <p class="text-brand-400">Universitas Islam Negeri Syarif Hidayatullah Jakarta</p>
+      </div>
+      <div class="text-center md:text-right space-y-1 text-brand-400">
+        <p>© 2026 Prodi Tadris Fisika UIN Jakarta. Hak cipta dilindungi undang-undang.</p>
+        <p>Referensi Fiqih: Mozaik Islam Inilah.com & Kitab Hishnul Muslim</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPT LOGIC (CALCULATION, DATA & INTERACTION) -->
+  <script>
+    // ==================== CITIES DATA ====================
+    const CITIES = [
+      { name: "DKI Jakarta", lat: -6.2088, lng: 106.8456, tz: 7, qibla: 295.14 },
+      { name: "Bogor", lat: -6.5950, lng: 106.8166, tz: 7, qibla: 295.12 },
+      { name: "Depok", lat: -6.4025, lng: 106.7942, tz: 7, qibla: 295.13 },
+      { name: "Tangerang (UIN Ciputat)", lat: -6.3050, lng: 106.7583, tz: 7, qibla: 295.16 },
+      { name: "Bekasi", lat: -6.2383, lng: 106.9756, tz: 7, qibla: 295.11 },
+      { name: "Bandung", lat: -6.9175, lng: 107.6191, tz: 7, qibla: 295.02 },
+      { name: "Semarang", lat: -6.9667, lng: 110.4167, tz: 7, qibla: 294.52 },
+      { name: "Yogyakarta", lat: -7.7956, lng: 110.3695, tz: 7, qibla: 294.61 },
+      { name: "Surabaya", lat: -7.2575, lng: 112.7521, tz: 7, qibla: 294.07 },
+      { name: "Banda Aceh", lat: 5.5483, lng: 95.3238, tz: 7, qibla: 291.60 },
+      { name: "Medan", lat: 3.5952, lng: 98.6722, tz: 7, qibla: 292.83 },
+      { name: "Padang", lat: -0.9471, lng: 100.4172, tz: 7, qibla: 294.81 },
+      { name: "Pekanbaru", lat: 0.5071, lng: 101.4478, tz: 7, qibla: 294.13 },
+      { name: "Palembang", lat: -2.9761, lng: 104.7754, tz: 7, qibla: 294.88 },
+      { name: "Bandar Lampung", lat: -5.4500, lng: 105.2667, tz: 7, qibla: 295.20 },
+      { name: "Denpasar (Bali)", lat: -8.6705, lng: 115.2126, tz: 8, qibla: 293.45 },
+      { name: "Mataram (Lombok)", lat: -8.5833, lng: 116.1167, tz: 8, qibla: 293.20 },
+      { name: "Kupang (NTT)", lat: -10.1772, lng: 123.6070, tz: 8, qibla: 291.80 },
+      { name: "Pontianak", lat: -0.0263, lng: 109.3425, tz: 7, qibla: 293.20 },
+      { name: "Banjarmasin", lat: -3.3194, lng: 114.5908, tz: 8, qibla: 292.80 },
+      { name: "Samarinda", lat: -0.5022, lng: 117.1536, tz: 8, qibla: 291.90 },
+      { name: "Makassar", lat: -5.1477, lng: 119.4327, tz: 8, qibla: 292.15 },
+      { name: "Manado", lat: 1.4748, lng: 124.8428, tz: 8, qibla: 289.40 },
+      { name: "Ambon", lat: -3.6547, lng: 128.1906, tz: 9, qibla: 289.90 },
+      { name: "Jayapura", lat: -2.5916, lng: 140.6690, tz: 9, qibla: 288.10 }
+    ];
+
+    let currentCity = CITIES[0];
+    let prayerTimesCache = {};
+
+    // ==================== ASTRONOMICAL PRAYER CALCULATION ====================
+    function calculatePrayerTimes(date, lat, lng, timezone) {
+      // Julian Date
+      const year = date.getFullYear();
+      const month = date.getMonth() + 1;
+      const day = date.getDate();
+
+      let a = Math.floor((14 - month) / 12);
+      let y = year + 4800 - a;
+      let m = month + 12 * a - 3;
+      let jd = day + Math.floor((153 * m + 2) / 5) + 365 * y + Math.floor(y / 4) - Math.floor(y / 100) + Math.floor(y / 400) - 32045;
+      
+      let d = jd - 2451545.0; // days since J2000.0
+
+      // Sun mean longitude
+      let L0 = (280.46646 + 0.9856474 * d) % 360;
+      // Mean anomaly
+      let M = (357.52911 + 0.98560028 * d) % 360;
+      let Mrad = M * Math.PI / 180;
+      // Equation of center
+      let C = (1.914602 - 0.004817 * (d / 36525)) * Math.sin(Mrad) + (0.019993 - 0.000101 * (d / 36525)) * Math.sin(2 * Mrad);
+      // Sun true longitude
+      let L = (L0 + C) % 360;
+      let Lrad = L * Math.PI / 180;
+
+      // Obliquity of ecliptic
+      let eps = 23.439291 - 0.000130042 * (d / 36525);
+      let epsrad = eps * Math.PI / 180;
+
+      // Declination
+      let sinDec = Math.sin(epsrad) * Math.sin(Lrad);
+      let dec = Math.asin(sinDec); // radians
+
+      // Equation of time in minutes
+      let U = (L0 - 0.0057183 - (Math.atan2(Math.cos(epsrad) * Math.sin(Lrad), Math.cos(Lrad)) * 180 / Math.PI)) / 15;
+      let eqt = (L0 / 15 - (Math.atan2(Math.cos(epsrad) * Math.sin(Lrad), Math.cos(Lrad)) * 180 / Math.PI) / 15) * 60;
+
+      // Solar Noon (Dzuhur) in local hours
+      let noon = 12 + timezone - (lng / 15) - (eqt / 60);
+
+      const latRad = lat * Math.PI / 180;
+
+      function hourAngle(altitudeDeg) {
+        let altRad = altitudeDeg * Math.PI / 180;
+        let cosH = (Math.sin(altRad) - Math.sin(latRad) * Math.sin(dec)) / (Math.cos(latRad) * Math.cos(dec));
+        if (cosH > 1) return 0;
+        if (cosH < -1) return Math.PI;
+        return Math.acos(cosH); // radians
+      }
+
+      // Kemenag RI angles: Subuh = -20°, Ashar shafi'i (shadow length factor 1), Maghrib = -0.833°, Isya = -18°
+      let subuhH = hourAngle(-20);
+      let terbitH = hourAngle(-0.833);
+      let maghribH = hourAngle(-0.833);
+      let isyaH = hourAngle(-18);
+
+      // Ashar angle
+      let asharAlt = Math.atan(1 / (1 + Math.tan(Math.abs(latRad - dec)))) * 180 / Math.PI;
+      let asharH = hourAngle(asharAlt);
+
+      // Convert hour angle to hours
+      let subuh = noon - (subuhH * 180 / Math.PI) / 15;
+      let imsak = subuh - (10 / 60); // 10 minutes before Subuh
+      let terbit = noon - (terbitH * 180 / Math.PI) / 15;
+      let dhuha = terbit + (20 / 60); // 20 mins after sunrise
+      let dzuhur = noon + (2 / 60); // +2 min ikhtiyat
+      let ashar = noon + (asharH * 180 / Math.PI) / 15 + (2 / 60);
+      let maghrib = noon + (maghribH * 180 / Math.PI) / 15 + (2 / 60);
+      let isya = noon + (isyaH * 180 / Math.PI) / 15 + (2 / 60);
+
+      function formatTime(h) {
+        let hours = Math.floor(h);
+        let mins = Math.floor((h - hours) * 60);
+        return String(hours).padStart(2, '0') + ':' + String(mins).padStart(2, '0');
+      }
+
+      return {
+        imsak: formatTime(imsak),
+        subuh: formatTime(subuh),
+        terbit: formatTime(terbit),
+        dhuha: formatTime(dhuha),
+        dzuhur: formatTime(dzuhur),
+        ashar: formatTime(ashar),
+        maghrib: formatTime(maghrib),
+        isya: formatTime(isya)
+      };
+    }
+
+    // ==================== QIBLA CALCULATOR ====================
+    function calculateQibla(lat, lng) {
+      const kaabaLat = 21.4225 * Math.PI / 180;
+      const kaabaLng = 39.8262 * Math.PI / 180;
+      const userLat = lat * Math.PI / 180;
+      const userLng = lng * Math.PI / 180;
+      const deltaLng = kaabaLng - userLng;
+
+      const y = Math.sin(deltaLng);
+      const x = Math.cos(userLat) * Math.tan(kaabaLat) - Math.sin(userLat) * Math.cos(deltaLng);
+      let qiblaRad = Math.atan2(y, x);
+      let qiblaDeg = (qiblaRad * 180 / Math.PI + 360) % 360;
+
+      // Distance via Haversine
+      const R = 6371; // km
+      const dLat = kaabaLat - userLat;
+      const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(userLat) * Math.cos(kaabaLat) * Math.sin(deltaLng / 2) * Math.sin(deltaLng / 2);
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      const distance = Math.round(R * c);
+
+      return { angle: qiblaDeg, distance: distance };
+    }
+
+    // ==================== PRAYER GUIDE DATA (Mozaik Inilah.com) ====================
+    const PRAYER_GUIDE = [
+      {
+        id: "sr_1",
+        cat: "syarat",
+        title: "Syarat Wajib Shalat",
+        sub: "Kriteria yang mewajibkan seseorang menunaikan shalat fardhu",
+        arab: "شُرُوطُ وُجُوبِ الصَّلَاةِ",
+        latin: "Syuruuthu Wujuubish Shalaah",
+        arti: "1. Beragama Islam (Muslim/Muslimah)\n2. Baligh (dewasa)\n3. Berakal sehat\n4. Suci dari haid dan nifas bagi wanita\n5. Telah sampai dakwah Islam\n6. Terjaga (tidak tidur pulas)",
+        note: "Meninggalkan shalat fardhu 5 waktu dengan sengaja bagi yang memenuhi syarat wajib merupakan dosa besar."
+      },
+      {
+        id: "sr_2",
+        cat: "syarat",
+        title: "Syarat Sah Shalat",
+        sub: "Hal-hal yang harus terpenuhi sebelum memulai shalat",
+        arab: "شُرُوطُ صِحَّةِ الصَّلَاةِ",
+        latin: "Syuruuthu Shihhatish Shalaah",
+        arti: "1. Suci dari hadas kecil (wudhu) & hadas besar (mandi wajib)\n2. Suci badan, pakaian, & tempat dari najis\n3. Menutup aurat dengan sempurna\n4. Mengetahui masuknya waktu shalat\n5. Menghadap kiblat (Ka'bah di Makkah)",
+        note: "Shalat tidak sah jika salah satu syarat sah tidak terpenuhi tanpa uzur syar'i."
+      },
+      {
+        id: "sr_3",
+        cat: "syarat",
+        title: "Rukun Shalat (13 Perkara)",
+        sub: "Bagian inti shalat yang wajib dilakukan secara berurutan",
+        arab: "أَرْكَانُ الصَّلَاةِ ثَلَاثَةَ عَشَرَ",
+        latin: "Arkaanush Shalaah Tsalaatsata 'Asyara",
+        arti: "1. Niat\n2. Berdiri bagi yang mampu\n3. Takbiratul Ihram\n4. Membaca Surat Al-Fatihah\n5. Ruku' dengan tuma'ninah\n6. I'tidal dengan tuma'ninah\n7. Sujud dua kali dengan tuma'ninah\n8. Duduk di antara dua sujud dengan tuma'ninah\n9. Duduk tasyahud akhir\n10. Membaca tasyahud akhir\n11. Membaca shalawat Nabi pada tasyahud akhir\n12. Mengucapkan salam pertama\n13. Tertib berurutan",
+        note: "Tuma'ninah adalah diam tenang sejenak seukuran membaca 'Subhanallah'."
+      },
+      {
+        id: "niat_subuh",
+        cat: "niat",
+        title: "Niat Shalat Subuh (2 Rakaat)",
+        sub: "Sendirian (Munfarid), Sebagai Imam, atau Sebagai Makmum",
+        arab: "أُصَلِّي فَرْضَ الصُّبْحِ رَكْعَتَيْنِ مُسْتَقْبِلَ الْقِبْلَةِ أَدَاءً (إِمَامًا / مَأْمُومًا / لِلَّهِ تَعَالَى)",
+        latin: "Ushallii fardhash-shubhi rak'atayni mustaqbilal qiblati adaa-an (imaaman / ma'muuman / lillaahi Ta'aala).",
+        arti: "Aku berniat shalat fardhu Subuh dua rakaat menghadap kiblat karena Allah Ta'ala.",
+        note: "Ganti kurung sesuai peran: 'imaaman' jika imam, 'ma'muuman' jika makmum, atau 'lillaahi Ta'aala' jika munfarid."
+      },
+      {
+        id: "niat_dzuhur",
+        cat: "niat",
+        title: "Niat Shalat Dzuhur (4 Rakaat)",
+        sub: "Waktu tergelincirnya matahari ke arah barat",
+        arab: "أُصَلِّي فَرْضَ الظُّهْرِ أَرْبَعَ رَكَعَاتٍ مُسْتَقْبِلَ الْقِبْلَةِ أَدَاءً لِلَّهِ تَعَالَى",
+        latin: "Ushallii fardhazh-zhuhri arba'a raka'aatin mustaqbilal qiblati adaa-an lillaahi Ta'aala.",
+        arti: "Aku berniat shalat fardhu Dzuhur empat rakaat menghadap kiblat karena Allah Ta'ala.",
+        note: "Tambahkan 'imaaman' jika menjadi imam, atau 'ma'muuman' jika menjadi makmum."
+      },
+      {
+        id: "niat_ashar",
+        cat: "niat",
+        title: "Niat Shalat Ashar (4 Rakaat)",
+        sub: "Waktu bayangan benda lebih panjang dari bendanya",
+        arab: "أُصَلِّي فَرْضَ الْعَصْرِ أَرْبَعَ رَكَعَاتٍ مُسْتَقْبِلَ الْقِبْلَةِ أَدَاءً لِلَّهِ تَعَالَى",
+        latin: "Ushallii fardhal 'ashri arba'a raka'aatin mustaqbilal qiblati adaa-an lillaahi Ta'aala.",
+        arti: "Aku berniat shalat fardhu Ashar empat rakaat menghadap kiblat karena Allah Ta'ala.",
+        note: "Shalat Ashar adalah Shalat Wustha yang sangat ditekankan penjagaannya."
+      },
+      {
+        id: "niat_maghrib",
+        cat: "niat",
+        title: "Niat Shalat Maghrib (3 Rakaat)",
+        sub: "Waktu terbenamnya piringan matahari sepenuhnya",
+        arab: "أُصَلِّي فَرْضَ الْمَغْرِبِ ثَلَاثَ رَكَعَاتٍ مُسْتَقْبِلَ الْقِبْلَةِ أَدَاءً لِلَّهِ تَعَالَى",
+        latin: "Ushallii fardhal maghribi tsalaatsa raka'aatin mustaqbilal qiblati adaa-an lillaahi Ta'aala.",
+        arti: "Aku berniat shalat fardhu Maghrib tiga rakaat menghadap kiblat karena Allah Ta'ala.",
+        note: "Dua rakaat pertama dibaca jahr (nyaring) oleh imam."
+      },
+      {
+        id: "niat_isya",
+        cat: "niat",
+        title: "Niat Shalat Isya (4 Rakaat)",
+        sub: "Waktu hilangnya mega merah di ufuk barat",
+        arab: "أُصَلِّي فَرْضَ الْعِشَاءِ أَرْبَعَ رَكَعَاتٍ مُسْتَقْبِلَ الْقِبْلَةِ أَدَاءً لِلَّهِ تَعَالَى",
+        latin: "Ushallii fardhal 'isyaa-i arba'a raka'aatin mustaqbilal qiblati adaa-an lillaahi Ta'aala.",
+        arti: "Aku berniat shalat fardhu Isya empat rakaat menghadap kiblat karena Allah Ta'ala.",
+        note: "Dianjurkan menyempurnakan ibadah malam dengan shalat witir."
+      },
+      {
+        id: "takbir_iftitah",
+        cat: "gerakan",
+        title: "1. Takbiratul Ihram & Doa Iftitah",
+        sub: "Membuka shalat dengan mengagungkan Allah",
+        arab: "اللَّهُ أَكْبَرُ كَبِيرًا، وَالْحَمْدُ لِلَّهِ كَثِيرًا، وَسُبْحَانَ اللَّهِ بُكْرَةً وَأَصِيلاً. إِنِّي وَجَّهْتُ وَجْهِيَ لِلَّذِي فَطَرَ السَّمَاوَاتِ وَالأَرْضَ حَنِيفًا مُسْلِمًا وَمَا أَنَا مِنَ الْمُشْرِكِينَ. إِنَّ صَلاَتِي وَنُسُكِي وَمَحْيَايَ وَمَمَاتِي لِلَّهِ رَبِّ الْعَالَمِينَ. لاَ شَرِيكَ لَهُ وَبِذَلِكَ أُمِرْتُ وَأَنَا مِنَ الْمُسْلِمِينَ",
+        latin: "Allaahu akbar kabiiraa wal hamdu lillaahi katsiiraa wa subhaanallaahi bukrataw wa ashiilaa. Innii wajjahtu wajhiya lilladzii fatharas-samaawaati wal ardha haniifam muslimaw wa maa ana minal musyrikiin. Inna shalaatii wa nusukii wa mahyaaya wa mamaatii lillaahi rabbil 'aalamiin. Laa syariika lahu wa bidzaalika umirtu wa ana minal muslimiin.",
+        arti: "Allah Maha Besar lagi sempurna kebesaran-Nya, segala puji bagi Allah sebanyak-banyaknya, dan Maha Suci Allah sepanjang pagi dan petang. Sesungguhnya kuhadapkan wajahku kepada Dzat yang menciptakan langit dan bumi dengan lurus dan berserah diri...",
+        note: "Dibaca setelah takbiratul ihram sebelum membaca Surat Al-Fatihah pada rakaat pertama."
+      },
+      {
+        id: "ruku",
+        cat: "gerakan",
+        title: "2. Bacaan Ruku' (3x)",
+        sub: "Membungkuk 90 derajat dengan punggung rata dan tenang",
+        arab: "سُبْحَانَ رَبِّيَ الْعَظِيمِ وَبِحَمْدِهِ",
+        latin: "Subhaana rabbiyal 'azhiimi wa bihamdih (3x)",
+        arti: "Maha Suci Tuhanku Yang Maha Agung dan dengan memuji kepada-Nya.",
+        note: "Wajib tuma'ninah (diam sejenak dan tenang) saat posisi ruku'."
+      },
+      {
+        id: "itidal",
+        cat: "gerakan",
+        title: "3. Bangkit dari Ruku' (I'tidal)",
+        sub: "Berdiri tegak lurus kembali dengan tuma'ninah",
+        arab: "سَمِعَ اللَّهُ لِمَنْ حَمِدَهُ. رَبَّنَا لَكَ الْحَمْدُ مِلْءَ السَّمَاوَاتِ وَمِلْءَ الأَرْضِ وَمِلْءَ مَا شِئْتَ مِنْ شَيْءٍ بَعْدُ",
+        latin: "Sami'allaahu liman hamidah. Rabbanaa lakal hamdu mil-as samaawaati wa mil-al ardhi wa mil-a maa syi'ta min syay-im ba'd.",
+        arti: "Allah mendengar orang yang memuji-Nya. Wahai Tuhan kami, bagi-Mu lah segala puji sepenuh langit dan sepenuh bumi serta sepenuh apa saja yang Engkau kehendaki setelah itu.",
+        note: "I'tidal adalah rukun fi'li yang wajib disertai tuma'ninah."
+      },
+      {
+        id: "sujud",
+        cat: "gerakan",
+        title: "4. Bacaan Sujud (3x)",
+        sub: "Menempelkan 7 anggota sujud ke lantai dengan penuh kerendahan",
+        arab: "سُبْحَانَ رَبِّيَ الأَعْلَى وَبِحَمْدِهِ",
+        latin: "Subhaana rabbiyal a'laa wa bihamdih (3x)",
+        arti: "Maha Suci Tuhanku Yang Maha Tinggi dan dengan memuji kepada-Nya.",
+        note: "Posisi terdekat seorang hamba dengan Allah adalah ketika bersujud."
+      },
+      {
+        id: "duduk_sujud",
+        cat: "gerakan",
+        title: "5. Duduk di Antara Dua Sujud",
+        sub: "Duduk iftirasy di antara sujud pertama dan kedua",
+        arab: "رَبِّ اغْفِرْ لِي، وَارْحَمْنِي، وَاجْبُرْنِي، وَارْفَعْنِي، وَارْزُقْنِي، وَاهْدِنِي، وَعَافِنِي، وَاعْفُ عَنِّي",
+        latin: "Rabbighfir lii, warhamnii, wajburnii, warfa'nii, warzuqnii, wahdinii, wa 'aafinii, wa'fu 'annii.",
+        arti: "Ya Tuhanku ampunilah aku, sayangilah aku, cukupkanlah kekuranganku, tinggikanlah derajatku, berilah aku rezeki, berilah aku petunjuk, berilah aku kesehatan, dan maafkanlah kesalahanku.",
+        note: "Doa yang mengumpulkan 8 permohonan kebaikan dunia dan akhirat."
+      },
+      {
+        id: "tasyahud_akhir",
+        cat: "gerakan",
+        title: "6. Bacaan Tasyahud Akhir & Shalawat",
+        sub: "Duduk tawarruk pada rakaat terakhir sebelum salam",
+        arab: "التَّحِيَّاتُ الْمُبَارَكَاتُ الصَّلَوَاتُ الطَّيِّبَاتُ لِلَّهِ، السَّلاَمُ عَلَيْكَ أَيُّهَا النَّبِيُّ وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ، السَّلاَمُ عَلَيْنَا وَعَلَى عِبَادِ اللَّهِ الصَّالِحِينَ، أَشْهَدُ أَنْ لاَ إِلَهَ إِلاَّ اللَّهُ وَأَشْهَدُ أَنَّ مُحَمَّدًا رَسُولُ اللَّهِ. اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ كَمَا صَلَّيْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ، وَبَارِكْ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ كَمَا بَارَكْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ فِي الْعَالَمِينَ إِنَّكَ حَمِيدٌ مَجِيدٌ",
+        latin: "Attahiyyaatul mubaarakaatush-shalawaatuth-thayyibaatu lillaah. Assalaamu 'alayka ayyuhan-nabiyyu wa rahmatullaahi wa barakaatuh. Assalaamu 'alaynaa wa 'alaa 'ibaadillaahish-shaalihiin. Asyhadu allaa ilaaha illallaahu wa asyhadu anna Muhammadar Rasuulullaah. Allaahumma shalli 'alaa Muhammad wa 'alaa aali Muhammad, kamaa shallayta 'alaa Ibraahiim wa 'alaa aali Ibraahiim. Wa baarik 'alaa Muhammad wa 'alaa aali Muhammad, kamaa baarakta 'alaa Ibraahiim wa 'alaa aali Ibraahiim, fil 'aalamiina innaka hamiidum majiid.",
+        arti: "Segala penghormatan yang penuh keberkahan, shalawat dan kebaikan adalah milik Allah. Semoga keselamatan, rahmat Allah dan berkah-Nya tercurah kepadamu wahai Nabi...",
+        note: "Rukun penutup shalat sebelum mengucapkan salam."
+      }
+    ];
+
+    // ==================== DZIKIR & DOA DATA ====================
+    const DZIKIR_PAGI = [
+      {
+        title: "Membaca Ayat Kursi",
+        arab: "اللَّهُ لَا إِلَهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ لَهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ مَنْ ذَا الَّذِي يَشْفَعُ عِنْدَهُ إِلَّا بِإِذْنِهِ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ وَلَا يُحِيطُونَ بِشَيْءٍ مِنْ عِلْمِهِ إِلَّا بِمَا شَاءَ وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالْأَرْضَ وَلَا يَئُودُهُ حِفْظُهُمَا وَهُوَ الْعَلِيُّ الْعَظِيمُ",
+        latin: "Allahu laa ilaaha illaa huwal hayyul qayyuum, laa ta'khudzuhuu sinatuw wa laa nawm...",
+        arti: "Allah, tidak ada tuhan selain Dia. Yang Maha Hidup, Yang terus-menerus mengurus makhluk-Nya...",
+        target: 1,
+        fadhilah: "Dilindungi dari gangguan jin hingga petang hari. (HR. An-Nasa'i & Ath-Thabrani)"
+      },
+      {
+        title: "Membaca 3 Qul (Al-Ikhlas, Al-Falaq, An-Naas) (3x)",
+        arab: "قُلْ هُوَ اللَّهُ أَحَدٌ ... قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ ... قُلْ أَعُوذُ بِرَبِّ النَّاسِ ...",
+        latin: "Qul huwallaahu ahad... Qul a'uudzu bi rabbil falaq... Qul a'uudzu bi rabbin-naas...",
+        arti: "Membaca surat Al-Ikhlas, Al-Falaq, dan An-Naas masing-masing sebanyak 3 kali.",
+        target: 3,
+        fadhilah: "Dicukupkan dari segala keburukan dan marabahaya. (HR. Abu Dawud & At-Tirmidzi)"
+      },
+      {
+        title: "Sayyidul Istighfar (Penghulu Istighfar)",
+        arab: "اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَهَ إِلَّا أَنْتَ خَلَقْتَنِي وَأَنَا عَبْدُكَ وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ أَبُوءُ لَكَ بِنِعْمَتِكَ عَلَيَّ وَأَبُوءُ بِذَنْبِي فَاغْفِرْ لِي فَإِنَّهُ لَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ",
+        latin: "Allaahumma anta rabbii laa ilaaha illaa anta khalaqtanii wa ana 'abduka wa ana 'alaa 'ahdika wa wa'dika mastatha'tu...",
+        arti: "Ya Allah, Engkau adalah Tuhanku, tidak ada Tuhan selain Engkau yang telah menciptakan aku dan aku adalah hamba-Mu...",
+        target: 1,
+        fadhilah: "Barangsiapa membacanya di pagi hari lalu meninggal sebelum petang, niscaya ia termasuk penghuni surga. (HR. Bukhari)"
+      },
+      {
+        title: "Dzikir Perlindungan Bahaya (3x)",
+        arab: "بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ وَهُوَ السَّمِيعُ الْعَلِيمُ",
+        latin: "Bismillaahil-ladzii laa yadhurru ma'asmihii syay-un fil ardhi wa laa fis-samaa-i wa huwas-samii'ul 'aliim (3x)",
+        arti: "Dengan menyebut nama Allah yang dengan nama-Nya tidak ada sesuatu pun di bumi maupun di langit yang dapat membahayakan, dan Dia Maha Mendengar lagi Maha Mengetahui.",
+        target: 3,
+        fadhilah: "Tidak akan ada marabahaya atau racun yang memudharatkannya hingga petang hari. (HR. Abu Dawud)"
+      }
+    ];
+
+    const DZIKIR_PETANG = [
+      {
+        title: "Doa Memasuki Waktu Petang",
+        arab: "أَمْسَيْنَا وَأَمْسَى الْمُلْكُ لِلَّهِ، وَالْحَمْدُ لِلَّهِ، لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ",
+        latin: "Amsaynaa wa amsal-mulku lillaah, wal-hamdu lillaah, laa ilaaha illallaahu wahdahu laa syariika lah...",
+        arti: "Kami telah memasuki waktu petang dan kerajaan ini milik Allah. Segala puji bagi Allah, tiada tuhan selain Allah semata...",
+        target: 1,
+        fadhilah: "Pengakuan tauhid dan penyerahan diri di waktu petang. (HR. Muslim)"
+      },
+      {
+        title: "Membaca Ayat Kursi Petang",
+        arab: "اللَّهُ لَا إِلَهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ...",
+        latin: "Allahu laa ilaaha illaa huwal hayyul qayyuum...",
+        arti: "Allah, tidak ada tuhan selain Dia. Yang Maha Hidup, Yang terus-menerus mengurus makhluk-Nya...",
+        target: 1,
+        fadhilah: "Terlindung dari godaan setan dan marabahaya malam hingga pagi hari."
+      },
+      {
+        title: "Memohon Perlindungan dari Kalimat Allah (3x)",
+        arab: "أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ",
+        latin: "A'uudzu bi kalimaatillaahit-taammaati min syarri maa khalaq (3x)",
+        arti: "Aku berlindung dengan kalimat-kalimat Allah yang sempurna dari kejahatan makhluk yang Dia ciptakan.",
+        target: 3,
+        fadhilah: "Tidak akan terkena sengatan hewan berbisa atau racun malam itu. (HR. Muslim)"
+      }
+    ];
+
+    const DZIKIR_TIDUR = [
+      {
+        title: "Meniup Telapak Tangan & Membaca 3 Qul (3x)",
+        arab: "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ (الْإِخْلَاصِ، الْفَلَقِ، النَّاسِ)",
+        latin: "Membaca Al-Ikhlas, Al-Falaq, An-Naas lalu meniupkan pada kedua telapak tangan dan mengusapkan ke seluruh tubuh yang terjangkau.",
+        arti: "Sunnah Rasulullah SAW sebelum tidur di tempat pembaringan (dilakukan sebanyak 3 kali).",
+        target: 3,
+        fadhilah: "Perlindungan fisik dan ruhani dari gangguan jin dan mimpi buruk saat tidur. (HR. Bukhari)"
+      },
+      {
+        title: "Membaca Dua Ayat Terakhir Surat Al-Baqarah",
+        arab: "آمَنَ الرَّسُولُ بِمَا أُنْزِلَ إِلَيْهِ مِنْ رَبِّهِ وَالْمُؤْمِنُونَ ۚ كُلٌّ آمَنَ بِاللَّهِ وَمَلَائِكَتِهِ وَكُتُبِهِ وَرُسُلِهِ...",
+        latin: "Aamanar-rasuulu bimaa unzila ilayhi mir-rabbihii wal-mu'minuun...",
+        arti: "Rasul telah beriman kepada Al-Qur'an yang diturunkan kepadanya dari Tuhannya, demikian pula orang-orang yang beriman...",
+        target: 1,
+        fadhilah: "Barangsiapa membaca dua ayat ini pada malam hari, niscaya keduanya mencukupkannya. (HR. Bukhari & Muslim)"
+      },
+      {
+        title: "Doa Membaringkan Badan",
+        arab: "بِاسْمِكَ رَبِّي وَضَعْتُ جَنْبِي وَبِكَ أَرْفَعُهُ، فَإِنْ أَمْسَكْتَ نَفْسِي فَارْحَمْهَا، وَإِنْ أَرْسَلْتَهَا فَاحْفَظْهَا بِمَا تَحْفَظُ بِهِ عِبَادَكَ الصَّالِحِينَ",
+        latin: "Bismika rabbii wadha'tu jambii wa bika arfa'uh, fa in amsakta nafsii farhamhaa, wa in arsaltahaa fahfazh-haa bimaa tahfazhu bihii 'ibaadakash-shaalihiin.",
+        arti: "Dengan nama-Mu wahai Tuhanku, aku meletakkan lambungku dan dengan nama-Mu aku mengangkatnya...",
+        target: 1,
+        fadhilah: "Menyerahkan jiwa dan raga dalam penjagaan terbaik Allah SWT. (HR. Bukhari & Muslim)"
+      }
+    ];
+
+    const DOA_HARIAN = [
+      {
+        title: "Doa Bangun Tidur",
+        arab: "الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ",
+        latin: "Alhamdu lillaahil-ladzii ahyaanaa ba'da maa amaatanaa wa ilaihin-nusyuur.",
+        arti: "Segala puji bagi Allah yang telah menghidupkan kami setelah mematikan kami, dan kepada-Nya lah tempat kembali.",
+        ref: "HR. Bukhari No. 6312"
+      },
+      {
+        title: "Doa Keluar Rumah",
+        arab: "بِسْمِ اللَّهِ تَوَكَّلْتُ عَلَى اللَّهِ، لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ",
+        latin: "Bismillaahi tawakkaltu 'alallaahi, laa hawla wa laa quwwata illaa billaah.",
+        arti: "Dengan menyebut nama Allah, aku bertawakal kepada Allah. Tiada daya dan upaya kecuali dengan pertolongan Allah.",
+        ref: "HR. Abu Dawud No. 5095"
+      },
+      {
+        title: "Doa Masuk Masjid",
+        arab: "اللَّهُمَّ افْتَحْ لِي أَبْوَابَ رَحْمَتِكَ",
+        latin: "Allaahummaftah lii abwaaba rahmatik.",
+        arti: "Ya Allah, bukakanlah untukku pintu-pintu rahmat-Mu.",
+        ref: "HR. Muslim No. 713"
+      },
+      {
+        title: "Doa Kedua Orang Tua",
+        arab: "رَبِّ اغْفِرْ لِي وَلِوَالِدَيَّ وَارْحَمْهُمَا كَمَا رَبَّيَانِي صَغِيرًا",
+        latin: "Rabbighfir lii wa liwaalidayya warhamhumaa kamaa rabbayaanii shaghiiraa.",
+        arti: "Wahai Tuhanku, ampunilah aku dan kedua orang tuaku, dan sayangilah mereka berdua sebagaimana mereka telah mendidikku di waktu kecil.",
+        ref: "QS. Al-Isra': 24"
+      },
+      {
+        title: "Doa Selamat Dunia dan Akhirat",
+        arab: "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",
+        latin: "Rabbanaa aatinaa fid-dunyaa hasanatan wa fil aakhirati hasanatan wa qinaa 'adzaaban-naar.",
+        arti: "Ya Tuhan kami, berilah kami kebaikan di dunia dan kebaikan di akhirat dan lindungilah kami dari siksa neraka.",
+        ref: "QS. Al-Baqarah: 201"
+      }
+    ];
+
+    // ==================== SAFE ICON INITIALIZER ====================
+    function safeCreateIcons() {
+      try {
+        if (window.lucide && typeof window.lucide.createIcons === 'function') {
+          window.lucide.createIcons();
+        }
+      } catch (err) {
+        console.warn("Lucide skipped:", err);
+      }
+    }
+
+    // ==================== APP INITIALIZATION ====================
+    document.addEventListener("DOMContentLoaded", () => {
+      // 1. Initialize city dropdown
+      try {
+        const citySelect = document.getElementById("city-select");
+        if (citySelect) {
+          CITIES.forEach((city, index) => {
+            const opt = document.createElement("option");
+            opt.value = index;
+            opt.textContent = `${city.name} (${city.tz === 7 ? 'WIB' : city.tz === 8 ? 'WITA' : 'WIT'})`;
+            citySelect.appendChild(opt);
+          });
+
+          citySelect.addEventListener("change", (e) => {
+            currentCity = CITIES[e.target.value];
+            refreshPrayerTimes();
+            updateQiblaDisplay();
+          });
+        }
+      } catch (e) {
+        console.error("City dropdown error:", e);
+      }
+
+      // 2. Refresh Clock & Prayer Times
+      try {
+        refreshPrayerTimes();
+        updateQiblaDisplay();
+        setInterval(updateClock, 1000);
+      } catch (e) {
+        console.error("Prayer times error:", e);
+      }
+
+      // 3. Initialize Prayer Guide
+      try {
+        renderPrayerGuide(PRAYER_GUIDE);
+      } catch (e) {
+        console.error("Prayer guide render error:", e);
+      }
+
+      // 4. Initialize Dzikir
+      try {
+        switchDzikirCategory('pagi');
+      } catch (e) {
+        console.error("Dzikir init error:", e);
+      }
+
+      // 5. Fetch astronomy data
+      try {
+        loadAstronomyData();
+      } catch (e) {
+        console.error("Astronomy load error:", e);
+      }
+
+      // 6. Setup theme toggle
+      try {
+        const themeBtn = document.getElementById("btn-theme-toggle");
+        if (themeBtn) themeBtn.addEventListener("click", toggleTheme);
+      } catch (e) {
+        console.error("Theme toggle error:", e);
+      }
+
+      safeCreateIcons();
+    });
+
+    // ==================== TAB SWITCHING ====================
+    function switchTab(tabId) {
+      document.querySelectorAll(".tab-content").forEach(el => el.classList.add("hidden"));
+      const target = document.getElementById("tab-" + tabId);
+      if (target) target.classList.remove("hidden");
+
+      document.querySelectorAll(".nav-tab").forEach(btn => {
+        if (btn.getAttribute("data-target") === tabId) {
+          btn.className = "nav-tab active flex items-center space-x-1.5 px-3.5 py-2.5 border-b-2 border-gold-400 text-gold-300 font-semibold whitespace-nowrap";
+        } else {
+          btn.className = "nav-tab flex items-center space-x-1.5 px-3.5 py-2.5 border-b-2 border-transparent text-brand-200 hover:text-white whitespace-nowrap";
+        }
+      });
+      safeCreateIcons();
+    }
+
+    // ==================== CLOCK & PRAYER COUNTDOWN ====================
+    function updateClock() {
+      const now = new Date();
+      const timeStr = now.toTimeString().split(' ')[0];
+      document.getElementById("current-clock").textContent = timeStr;
+
+      // Update date
+      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      document.getElementById("masehi-date").textContent = now.toLocaleDateString('id-ID', options);
+
+      // Countdown logic
+      if (prayerTimesCache.raw) {
+        updateNextPrayerCountdown(now, prayerTimesCache.raw);
+      }
+    }
+
+    function refreshPrayerTimes() {
+      const now = new Date();
+      const times = calculatePrayerTimes(now, currentCity.lat, currentCity.lng, currentCity.tz);
+      prayerTimesCache.raw = times;
+
+      const container = document.getElementById("prayer-cards-container");
+      container.innerHTML = "";
+
+      const prayerList = [
+        { name: "Imsak", time: times.imsak, icon: "alarm-clock" },
+        { name: "Subuh", time: times.subuh, icon: "sun-dim" },
+        { name: "Terbit", time: times.terbit, icon: "sunrise" },
+        { name: "Dhuha", time: times.dhuha, icon: "sun-medium" },
+        { name: "Dzuhur", time: times.dzuhur, icon: "sun" },
+        { name: "Ashar", time: times.ashar, icon: "cloud-sun" },
+        { name: "Maghrib", time: times.maghrib, icon: "sunset" },
+        { name: "Isya", time: times.isya, icon: "moon" }
+      ];
+
+      prayerList.forEach(p => {
+        const card = document.createElement("div");
+        card.className = "bg-white dark:bg-slate-900 p-3 sm:p-4 rounded-xl border border-slate-200 dark:border-slate-800 text-center shadow-xs transition hover:border-brand-500 hover:shadow-md";
+        card.innerHTML = `
+          <div class="text-xs font-semibold text-slate-500 dark:text-slate-400 mb-1">${p.name}</div>
+          <div class="text-lg sm:text-xl font-bold font-mono text-brand-700 dark:text-brand-400">${p.time}</div>
+          <div class="text-[10px] text-slate-400 mt-0.5">${currentCity.tz === 7 ? 'WIB' : currentCity.tz === 8 ? 'WITA' : 'WIT'}</div>
+        `;
+        container.appendChild(card);
+      });
+
+      updateNextPrayerCountdown(now, times);
+    }
+
+    function updateNextPrayerCountdown(now, times) {
+      const nowMin = now.getHours() * 60 + now.getMinutes() + now.getSeconds() / 60;
+
+      function toMin(timeStr) {
+        const [h, m] = timeStr.split(':').map(Number);
+        return h * 60 + m;
+      }
+
+      const mainPrayers = [
+        { name: "Subuh", min: toMin(times.subuh), timeStr: times.subuh },
+        { name: "Dzuhur", min: toMin(times.dzuhur), timeStr: times.dzuhur },
+        { name: "Ashar", min: toMin(times.ashar), timeStr: times.ashar },
+        { name: "Maghrib", min: toMin(times.maghrib), timeStr: times.maghrib },
+        { name: "Isya", min: toMin(times.isya), timeStr: times.isya }
+      ];
+
+      let next = null;
+      for (let p of mainPrayers) {
+        if (p.min > nowMin) {
+          next = p;
+          break;
+        }
+      }
+
+      // If passed Isya, next is tomorrow's Subuh
+      let diffMin = 0;
+      if (!next) {
+        next = mainPrayers[0]; // Subuh
+        diffMin = (24 * 60 - nowMin) + next.min;
+      } else {
+        diffMin = next.min - nowMin;
+      }
+
+      const diffSec = Math.max(0, Math.floor(diffMin * 60));
+      const hours = Math.floor(diffSec / 3600);
+      const minutes = Math.floor((diffSec % 3600) / 60);
+      const seconds = diffSec % 60;
+
+      const countdownStr = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+      
+      const tzLabel = currentCity.tz === 7 ? 'WIB' : currentCity.tz === 8 ? 'WITA' : 'WIT';
+      document.getElementById("next-prayer-name").innerHTML = `<span>${next.name}</span> <span id="next-prayer-time" class="text-gold-300 font-mono text-2xl font-bold">(${next.timeStr} ${tzLabel})</span>`;
+      document.getElementById("countdown-timer").textContent = countdownStr;
+    }
+
+    // ==================== QIBLA DISPLAY ====================
+    function updateQiblaDisplay(customAngle, customDist, customName) {
+      const angle = customAngle !== undefined ? customAngle : currentCity.qibla;
+      const dist = customDist !== undefined ? customDist : 7915;
+      const name = customName || currentCity.name;
+
+      document.getElementById("qibla-angle-text").textContent = `${angle.toFixed(2)}° NW`;
+      document.getElementById("qibla-city-desc").textContent = `Dari ${name} ke Ka'bah di Makkah: ~${dist.toLocaleString('id-ID')} km`;
+      document.getElementById("qibla-pointer").style.transform = `rotate(${angle}deg)`;
+    }
+
+    function getLocationAndCalculateQibla() {
+      const status = document.getElementById("gps-status");
+      if (!navigator.geolocation) {
+        status.textContent = "Geolokasi tidak didukung oleh browser Anda.";
+        return;
+      }
+
+      status.textContent = "Sedang membaca koordinat GPS...";
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          const lat = pos.coords.latitude;
+          const lng = pos.coords.longitude;
+          const res = calculateQibla(lat, lng);
+          status.innerHTML = `<span class="text-emerald-500 font-semibold">Lokasi ditemukan (${lat.toFixed(4)}°, ${lng.toFixed(4)}°)</span>`;
+          updateQiblaDisplay(res.angle, res.distance, "Posisi GPS Anda");
+        },
+        (err) => {
+          status.textContent = "Gagal mengambil lokasi GPS: " + err.message;
+        },
+        { enableHighAccuracy: true, timeout: 10000 }
+      );
+    }
+
+    // ==================== PRAYER GUIDE RENDERING ====================
+    function renderPrayerGuide(items) {
+      const container = document.getElementById("prayer-guide-container");
+      container.innerHTML = "";
+
+      if (items.length === 0) {
+        container.innerHTML = `<div class="p-8 text-center text-slate-400">Tidak ada bacaan shalat yang sesuai dengan kata kunci pencarian.</div>`;
+        return;
+      }
+
+      items.forEach(item => {
+        const el = document.createElement("div");
+        el.className = "bg-slate-50 dark:bg-slate-800/80 rounded-xl p-4 sm:p-5 border border-slate-200 dark:border-slate-700/80 space-y-3";
+        el.innerHTML = `
+          <div class="flex items-start justify-between gap-3">
+            <div>
+              <span class="inline-block text-[10px] uppercase tracking-wider font-bold px-2 py-0.5 rounded bg-brand-100 dark:bg-brand-900/60 text-brand-800 dark:text-brand-300 mb-1">
+                ${item.cat === 'syarat' ? 'Syarat & Rukun' : item.cat === 'niat' ? 'Niat Shalat' : 'Gerakan & Bacaan'}
+              </span>
+              <h4 class="text-base font-bold text-slate-900 dark:text-white">${item.title}</h4>
+              <p class="text-xs text-slate-500 dark:text-slate-400">${item.sub}</p>
+            </div>
+            <button onclick="copyText('${item.id}')" class="p-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-400 hover:text-slate-600 transition" title="Salin">
+              <i data-lucide="copy" class="w-4 h-4"></i>
+            </button>
+          </div>
+
+          <div class="bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-700 text-right">
+            <p class="arabic-text text-xl sm:text-2xl text-slate-900 dark:text-slate-100 font-semibold" id="arab-${item.id}">${item.arab}</p>
+          </div>
+
+          <div class="space-y-1.5 text-xs sm:text-sm">
+            <p class="italic text-brand-800 dark:text-brand-300 font-medium">${item.latin}</p>
+            <p class="text-slate-600 dark:text-slate-300 leading-relaxed whitespace-pre-line"><strong>Arti:</strong> ${item.arti}</p>
+          </div>
+
+          ${item.note ? `
+            <div class="bg-gold-50 dark:bg-slate-900/80 p-2.5 rounded-lg border border-gold-200 dark:border-gold-900/40 text-[11px] text-gold-900 dark:text-gold-300 flex items-start gap-1.5">
+              <span class="text-gold-600 font-bold">ℹ Fiqih:</span>
+              <span>${item.note}</span>
+            </div>
+          ` : ''}
+        `;
+        container.appendChild(el);
+      });
+
+      safeCreateIcons();
+    }
+
+    function filterPrayerGuide(category) {
+      document.querySelectorAll(".guide-filter-btn").forEach(b => {
+        b.className = "guide-filter-btn px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-semibold whitespace-nowrap hover:bg-slate-200";
+      });
+      event.target.className = "guide-filter-btn active px-3 py-1.5 rounded-lg bg-brand-600 text-white text-xs font-semibold whitespace-nowrap";
+
+      if (category === 'all') {
+        renderPrayerGuide(PRAYER_GUIDE);
+      } else {
+        const filtered = PRAYER_GUIDE.filter(item => item.cat === category);
+        renderPrayerGuide(filtered);
+      }
+    }
+
+    function searchPrayerGuide() {
+      const q = document.getElementById("guide-search-input").value.toLowerCase().trim();
+      if (!q) {
+        renderPrayerGuide(PRAYER_GUIDE);
+        return;
+      }
+      const filtered = PRAYER_GUIDE.filter(item =>
+        item.title.toLowerCase().includes(q) ||
+        item.latin.toLowerCase().includes(q) ||
+        item.arti.toLowerCase().includes(q)
+      );
+      renderPrayerGuide(filtered);
+    }
+
+    // ==================== DZIKIR RENDERING & INTERACTIVE COUNTER ====================
+    let dzikirCounters = {};
+
+    function switchDzikirCategory(cat) {
+      document.querySelectorAll(".dzikir-cat-btn").forEach(b => {
+        b.className = "dzikir-cat-btn px-3.5 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold";
+      });
+      document.querySelector(`[data-cat="${cat}"]`).className = "dzikir-cat-btn active px-3.5 py-1.5 rounded-xl bg-brand-600 text-white text-xs font-bold";
+
+      const container = document.getElementById("dzikir-items-container");
+      container.innerHTML = "";
+
+      let items = [];
+      if (cat === 'pagi') items = DZIKIR_PAGI;
+      else if (cat === 'petang') items = DZIKIR_PETANG;
+      else if (cat === 'tidur') items = DZIKIR_TIDUR;
+      else if (cat === 'doa') items = DOA_HARIAN;
+
+      items.forEach((item, idx) => {
+        const id = `${cat}_${idx}`;
+        if (dzikirCounters[id] === undefined) dzikirCounters[id] = 0;
+
+        const card = document.createElement("div");
+        card.className = "bg-slate-50 dark:bg-slate-800/80 rounded-xl p-4 sm:p-5 border border-slate-200 dark:border-slate-700/80 space-y-3";
+        card.innerHTML = `
+          <div class="flex items-center justify-between">
+            <h4 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white">${item.title}</h4>
+            ${item.target ? `
+              <span class="text-xs px-2.5 py-1 rounded-full bg-emerald-100 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-300 font-semibold border border-emerald-300 dark:border-emerald-800">
+                Target: ${item.target}x
+              </span>
+            ` : (item.ref ? `<span class="text-xs text-slate-400 font-medium">${item.ref}</span>` : '')}
+          </div>
+
+          <div class="bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-700 text-right">
+            <p class="arabic-text text-xl sm:text-2xl text-slate-900 dark:text-slate-100 font-semibold">${item.arab}</p>
+          </div>
+
+          <div class="space-y-1 text-xs sm:text-sm">
+            <p class="italic text-brand-800 dark:text-brand-300">${item.latin}</p>
+            <p class="text-slate-600 dark:text-slate-300 leading-relaxed whitespace-pre-line"><strong>Arti:</strong> ${item.arti}</p>
+          </div>
+
+          ${item.fadhilah ? `
+            <div class="text-[11px] text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-slate-900/60 p-2 rounded-lg border border-emerald-200 dark:border-emerald-900/40">
+              <strong>Fadhilah:</strong> ${item.fadhilah}
+            </div>
+          ` : ''}
+
+          ${item.target ? `
+            <div class="pt-2 flex items-center justify-between border-t border-slate-200 dark:border-slate-700">
+              <div class="text-xs font-medium text-slate-500">
+                Hitungan Tasbih: <span id="counter-val-${id}" class="font-bold text-base text-brand-600 font-mono">${dzikirCounters[id]}</span> / ${item.target}
+              </div>
+              <div class="flex space-x-2">
+                <button onclick="incrementDzikir('${id}', ${item.target})" class="px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow transition flex items-center space-x-1">
+                  <i data-lucide="plus-circle" class="w-4 h-4"></i>
+                  <span>Hitung (+1)</span>
+                </button>
+                <button onclick="resetDzikir('${id}')" class="px-2.5 py-2 rounded-lg bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300 text-xs font-semibold" title="Reset">
+                  <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+                </button>
+              </div>
+            </div>
+          ` : ''}
+        `;
+        container.appendChild(card);
+      });
+
+      safeCreateIcons();
+    }
+
+    function incrementDzikir(id, target) {
+      if (dzikirCounters[id] < target) {
+        dzikirCounters[id]++;
+        document.getElementById(`counter-val-${id}`).textContent = dzikirCounters[id];
+        if (navigator.vibrate) navigator.vibrate(50);
+        if (dzikirCounters[id] === target) {
+          if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
+        }
+      }
+    }
+
+    function resetDzikir(id) {
+      dzikirCounters[id] = 0;
+      document.getElementById(`counter-val-${id}`).textContent = 0;
+    }
+
+    // ==================== ASTRONOMY DATA LOADER ====================
+    async function loadAstronomyData() {
+      const container = document.getElementById("astronomy-chapters-container");
+      try {
+        const res = await fetch("assets/buku_astronomi.json");
+        if (!res.ok) throw new Error("Network response was not ok");
+        astronomyChapters = await res.json();
+        renderAstronomyChapters(astronomyChapters);
+      } catch (e) {
+        console.warn("Loading fallback astronomy data...", e);
+        // Fallback basic astronomy chapters
+        astronomyChapters = generateFallbackAstronomy();
+        renderAstronomyChapters(astronomyChapters);
+      }
+    }
+
+    function renderAstronomyChapters(chapters) {
+      const container = document.getElementById("astronomy-chapters-container");
+      container.innerHTML = "";
+
+      if (chapters.length === 0) {
+        container.innerHTML = `<div class="p-8 text-center text-slate-400">Tidak ada materi bab yang cocok dengan pencarian Anda.</div>`;
+        return;
+      }
+
+      chapters.forEach(chap => {
+        const el = document.createElement("div");
+        el.className = "border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden bg-slate-50/50 dark:bg-slate-800/50";
+        el.innerHTML = `
+          <button onclick="toggleAccordion('astro-chap-${chap.id}')" class="w-full text-left p-4 sm:p-5 flex items-center justify-between hover:bg-slate-100/70 dark:hover:bg-slate-800 transition">
+            <div class="flex items-center space-x-3">
+              <span class="w-9 h-9 rounded-xl bg-brand-100 dark:bg-brand-900/60 text-brand-700 dark:text-brand-300 flex items-center justify-center font-bold text-xs shrink-0">
+                ${chap.id}
+              </span>
+              <div>
+                <span class="text-[10px] font-bold uppercase tracking-wider text-brand-600 dark:text-brand-400 block">${chap.number || 'BAB ' + chap.id} • ${chap.category || 'Materi Astronomi'}</span>
+                <h4 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white">${chap.title}</h4>
+              </div>
+            </div>
+            <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transform transition-transform" id="arrow-astro-chap-${chap.id}"></i>
+          </button>
+
+          <div id="astro-chap-${chap.id}" class="hidden p-4 sm:p-5 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 space-y-4">
+            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-medium bg-brand-50/50 dark:bg-brand-950/40 p-3 rounded-lg border border-brand-100 dark:border-brand-900/50">
+              <strong>Ringkasan Bab:</strong> ${chap.summary}
+            </p>
+
+            ${chap.sections ? chap.sections.map(sec => `
+              <div class="border-l-2 border-brand-500 pl-3.5 space-y-1.5">
+                <h5 class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white">${sec.title}</h5>
+                <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">${sec.explanation}</p>
+                ${sec.keyPoints ? `
+                  <ul class="list-disc list-inside text-xs text-slate-600 dark:text-slate-400 space-y-1 pt-1">
+                    ${sec.keyPoints.map(kp => `<li>${kp}</li>`).join('')}
+                  </ul>
+                ` : ''}
+                ${sec.formulaOrFacts ? `
+                  <div class="mt-2 text-[11px] font-mono bg-slate-100 dark:bg-slate-800 p-2 rounded text-brand-700 dark:text-brand-300">
+                    📐 ${sec.formulaOrFacts}
+                  </div>
+                ` : ''}
+              </div>
+            `).join('') : ''}
+          </div>
+        `;
+        container.appendChild(el);
+      });
+
+      safeCreateIcons();
+    }
+
+    function toggleAccordion(id) {
+      const el = document.getElementById(id);
+      const arrow = document.getElementById("arrow-" + id);
+      if (el.classList.contains("hidden")) {
+        el.classList.remove("hidden");
+        arrow.style.transform = "rotate(180deg)";
+      } else {
+        el.classList.add("hidden");
+        arrow.style.transform = "rotate(0deg)";
+      }
+    }
+
+    function searchAstronomy() {
+      const q = document.getElementById("astronomy-search").value.toLowerCase().trim();
+      if (!q) {
+        renderAstronomyChapters(astronomyChapters);
+        return;
+      }
+      const filtered = astronomyChapters.filter(c =>
+        c.title.toLowerCase().includes(q) ||
+        (c.summary && c.summary.toLowerCase().includes(q)) ||
+        (c.category && c.category.toLowerCase().includes(q))
+      );
+      renderAstronomyChapters(filtered);
+    }
+
+    function generateFallbackAstronomy() {
+      return [
+        { id: 1, number: "BAB 1", title: "Pengantar Astronomi & Pengamatan Langit", category: "Dasar Astronomi", summary: "Membahas hakikat astronomi sebagai sains observasional, sejarah perkembangan dari geosentrisme menuju heliosentrisme, dan cabang astronomi modern.", sections: [{ title: "Hakikat Sains Astronomi", explanation: "Astronomi mengamati foton radiasi elektromagnetik dari luar angkasa untuk memahami alam semesta.", formulaOrFacts: "Kecepatan cahaya (c) = 299.792.458 m/s; 1 Tahun Cahaya ≈ 9,46 × 10¹² km." }] },
+        { id: 2, number: "BAB 2", title: "Tata Surya & Hukum Pergerakan Planet", category: "Mekanika Langit", summary: "Membedah anggota tata surya serta Hukum Kepler dan Hukum Gravitasi Universal Newton yang menjadi dasar mekanika orbit benda langit.", sections: [{ title: "Hukum Kepler I, II, III", explanation: "Orbit planet berbentuk elips dengan matahari di salah satu titik fokusnya.", formulaOrFacts: "T² / a³ = konstan." }] },
+        { id: 3, number: "BAB 3", title: "Matahari Sebagai Bintang Induk", category: "Astrofisika Bintang", summary: "Struktur inti fusi nuklir matahari, zona radiatif, zona konvektif, fotosfer, kromosfer, korona, dan aktivitas bintik matahari.", sections: [{ title: "Reaksi Fusi Inti", explanation: "Fusi 4 proton menjadi 1 inti Helium melepaskan energi matahari melalui persamaan E = mc².", formulaOrFacts: "Luminositas Matahari L☉ ≈ 3,828 × 10²⁶ Watt." }] },
+        { id: 4, number: "BAB 4", title: "Bulan & Gerak Relatif Bumi-Bulan-Matahari", category: "Ilmu Falak & Kalender", summary: "Fase bulan, periode sideris dan sinodis, fenomena pasang surut air laut, serta dasar perhitungan awal bulan Kamariyah (Hijriyah).", sections: [{ title: "Bulan Sinodis & Hilal", explanation: "Periode revolusi sinodis bulan rata-rata 29,53059 hari merupakan basis kalender Islam.", formulaOrFacts: "Sudut elongasi hilal minimum Imkanur Rukyat Kemenag = 6,4° dan tinggi 3°." }] },
+        { id: 5, number: "BAB 5", title: "Bintang: Spektroskopi & Siklus Hidup", category: "Evolusi Bintang", summary: "Klasifikasi spektral bintang OBAFGKM, Diagram Hertzsprung-Russell, pembentukan protobintang hingga kematian menjadi Katai Putih, Bintang Neutron, atau Black Hole.", sections: [{ title: "Diagram H-R", explanation: "Hubungan temperatur permukaan vs luminositas bintang.", formulaOrFacts: "Batas Chandrasekhar M ≈ 1,44 M☉." }] },
+        { id: 6, number: "BAB 6", title: "Galaksi Bima Sakti & Alam Ekstragalaksi", category: "Struktur Galaksi", summary: "Arsitektur spiral galaksi Bima Sakti kita, materi gelap (dark matter), dan klasifikasi galaksi Hubble (spiral, elips, lentikular, irregular).", sections: [{ title: "Bima Sakti", explanation: "Galaksi spiral berbatang berdiameter ~100.000 tahun cahaya dengan lubang hitam supermasif Sagittarius A* di pusatnya.", formulaOrFacts: "Massa Bima Sakti ~1,5 triliun M☉." }] },
+        { id: 7, number: "BAB 7", title: "Kosmologi: Asal-Usul & Nasib Alam Semesta", category: "Kosmologi", summary: "Teori Big Bang, radiasi latar gelombang mikro (CMBR), ekspansi alam semesta Hukum Hubble-Lemaître, energi gelap (dark energy).", sections: [{ title: "Hukum Hubble", explanation: "Galaksi yang lebih jauh menjauh dengan kecepatan lebih tinggi.", formulaOrFacts: "v = H₀ × d (H₀ ≈ 70 km/s/Mpc)." }] },
+        { id: 8, number: "BAB 8", title: "Teleskop & Instrumen Observasi Modern", category: "Instrumentasi", summary: "Teleskop refraktor lensa, reflektor cermin cekung, sensor CCD/CMOS, teleskop antariksa Hubble dan James Webb.", sections: [{ title: "Daya Pisah Teleskop", explanation: "Resolusi sudut difraksi Rayleigh θ = 1,22 λ / D.", formulaOrFacts: "JWST berdiameter cermin primer 6,5 meter." }] },
+        { id: 9, number: "BAB 9", title: "Benda Kecil Tata Surya: Asteroid, Komet & Meteor", category: "Tata Surya", summary: "Sabuk Asteroid antara Mars dan Jupiter, Komet dari Sabuk Kuiper dan Awan Oort, fenomena hujan meteor atmosfer Bumi.", sections: [{ title: "Komet & Ekor Gas", explanation: "Bola es debu kotor yang menyublim menghasilkan koma dan ekor yang selalu menjauhi arah angin matahari.", formulaOrFacts: "Komet Halley mengorbit setiap 75-76 tahun." }] },
+        { id: 10, number: "BAB 10", title: "Astrobiologi & Pencarian Eksoplanet", category: "Astrobiologi", summary: "Zona laik huni (habitable zone), metode deteksi transit dan kecepatan radial eksoplanet, tanda-tanda biosignatures.", sections: [{ title: "Metode Transit", explanation: "Penurunan kurva cahaya bintang induk ketika planet melintas di depannya.", formulaOrFacts: "ΔF / F ≈ (R_p / R_* )²." }] },
+        { id: 11, number: "BAB 11", title: "Astronomi Islam: Sejarah & Kontribusi Falak", category: "Sejarah Sains Islam", summary: "Zaman keemasan sains Islam: observatorium Maragha, astrolabe Al-Khawarizmi, katalog bintang Al-Sufi, Ibn Al-Haytham, Al-Battani, dan Ibn Asy-Syathir.", sections: [{ title: "Pengembangan Trigonometri Bola", explanation: "Ilmuwan falak Islam mengembangkan rumus sinus dan kosinus bola untuk menghitung kiblat dan waktu shalat presisi.", formulaOrFacts: "Zij Al-Shabi karya Al-Battani menjadi rujukan astronomi Eropa." }] },
+        { id: 12, number: "BAB 12", title: "Aplikasi Fisika Falak Modern: Jadwal & Hilal", category: "Aplikasi Falak Modern", summary: "Formulasi hisab kontemporer berbasis ephemeris VSOP87 dan ELP2000, hisab arah kiblat ellipsoidal WGS84, dan kriteria visibilitas hilal MABIMS modern.", sections: [{ title: "Ephemeris Modern", explanation: "Perhitungan komputasi presisi tinggi untuk koordinat toposentrik benda langit.", formulaOrFacts: "Kriteria MABIMS Baru: Tinggi hilal ≥ 3°, Elongasi ≥ 6,4°." }] }
+      ];
+    }
+
+    // ==================== UTILITY FUNCTIONS ====================
+    function copyText(id) {
+      const text = document.getElementById(`arab-${id}`).textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        alert("Bacaan Arab berhasil disalin!");
+      });
+    }
+
+    function toggleTheme() {
+      const html = document.documentElement;
+      const icon = document.getElementById("theme-icon");
+      if (html.classList.contains("dark")) {
+        html.classList.remove("dark");
+        icon.setAttribute("data-lucide", "moon");
+      } else {
+        html.classList.add("dark");
+        icon.setAttribute("data-lucide", "sun");
+      }
+      safeCreateIcons();
+    }
+
+    function installOrDownloadAPK() {
+      alert("Aplikasi Arahku (Package: com.taufiq.arahku v2.0)\n\nUntuk mengunduh file APK langsung:\n1. Di AI Studio: Klik menu Settings/Export -> Export APK atau Download Project.\n2. Google Play Store: Aplikasi siap dipublikasikan via Google Play Console dengan ID 'com.taufiq.arahku'.");
+    }
+
+    function promptPWA() {
+      alert("Panduan Pemasangan PWA:\n\n- Chrome / Edge di HP: Klik tombol menu (titik tiga) di kanan atas, lalu pilih 'Tambahkan ke Layar Utama' (Add to Home Screen).\n- Safari di iPhone: Klik tombol Share lalu pilih 'Add to Home Screen'.\n\nAplikasi Arahku akan terpasang layaknya aplikasi native di ponsel Anda!");
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,386 @@
+[
+  {
+    "id": 1,
+    "number": "BAB 1",
+    "title": "Pengantar Astronomi & Pengamatan Langit",
+    "category": "Dasar Astronomi",
+    "summary": "Membahas hakikat astronomi sebagai sains observasional, sejarah perkembangan dari geosentrisme menuju heliosentrisme, dan cabang-cabang ilmu astronomi modern.",
+    "sections": [
+      {
+        "title": "Hakikat Sains Astronomi",
+        "explanation": "Astronomi adalah ilmu alam yang mempelajari benda-benda langit (seperti bintang, planet, komet, nebula, galaksi) serta fenomena yang terjadi di luar atmosfer Bumi. Berbeda dengan ilmu laboratorium di mana ilmuwan dapat memanipulasi objek eksperimen secara langsung, astronomi sebagian besar merupakan sains observasional di mana informasi diperoleh dari radiasi elektromagnetik yang dipancarkan oleh objek-objek langit.",
+        "keyPoints": [
+          "Astronomi mengandalkan pengamatan foton (radiasi elektromagnetik) dari sinar gamma hingga gelombang radio.",
+          "Astronomi modern terbagi menjadi: Astrometri (posisi dan gerak), Mekanika Langit (gravitasi dan orbit), Astrofisika (sifat fisis materi kosmik), dan Kosmologi (asal-usul alam semesta)."
+        ],
+        "formulaOrFacts": "Kecepatan cahaya (c) = 299.792.458 m/s; 1 Tahun Cahaya (ly) ≈ 9,46 × 10¹² km; 1 Parsec (pc) ≈ 3,26 ly ≈ 3,086 × 10¹³ km."
+      },
+      {
+        "title": "Perkembangan Sejarah Astronomi",
+        "explanation": "Astronomi kuno berlandaskan model Geosentris yang digagas oleh Claudius Ptolemaeus, di mana Bumi dianggap sebagai pusat alam semesta yang diam. Pada abad ke-16, Nicolaus Copernicus mencetuskan model Heliosentris (Matahari sebagai pusat peredaran planet), yang kemudian dibuktikan secara observasional oleh Galileo Galilei menggunakan teleskop buatannya (menemukan 4 satelit Jupiter dan fase planet Venus).",
+        "keyPoints": [
+          "Model Geosentris Ptolemaeus membutuhkan konsep deferent dan epicycle untuk menjelaskan gerak mundur (retrograde) planet.",
+          "Revolusi Copernican mengubah paradigma kosmik manusia dari egosentris menjadi pemahaman sains objektif."
+        ],
+        "formulaOrFacts": "Tahun 1609: Galileo mengarahkan teleskop pertama ke langit; Kepler menerbitkan Astronomia Nova."
+      }
+    ],
+    "tags": ["Pengantar", "Sejarah", "Geosentris", "Heliosentris"]
+  },
+  {
+    "id": 2,
+    "number": "BAB 2",
+    "title": "Tata Surya & Hukum-Hukum Pergerakan Planet",
+    "category": "Mekanika Langit",
+    "summary": "Membedah anggota tata surya serta Hukum Kepler dan Hukum Gravitasi Universal Newton yang menjadi dasar mekanika orbit benda langit.",
+    "sections": [
+      {
+        "title": "Arsitektur Sistem Tata Surya",
+        "explanation": "Tata Surya kita terdiri dari Matahari sebagai bintang induk yang menguasai 99,86% massa sistem, dikelilingi oleh delapan planet utama: empat planet kebumian/terestrial (Merkurius, Venus, Bumi, Mars) yang berdensitas tinggi dengan permukaan berbatu padat, dan empat planet raksasa gas/jovian (Jupiter, Saturnus, Uranus, Neptunus) yang berukuran besar dengan atmosfer gas tebal. Selain itu terdapat planet kerdil (Pluto, Ceres, Eris), sabuk asteroid utama, dan sabuk Kuiper di tepi luar.",
+        "keyPoints": [
+          "Planet Terestrial: Ukuran relatif kecil, bermassa rendah, tidak memiliki cincin, satelit alami sedikit.",
+          "Planet Jovian: Ukuran masif, densitas rendah, memiliki banyak satelit alami, dan memiliki sistem cincin debu/es."
+        ],
+        "formulaOrFacts": "Jarak rata-rata Bumi-Matahari didefinisikan sebagai 1 Satuan Astronomi (1 AU ≈ 149.597.870,7 km)."
+      },
+      {
+        "title": "Hukum-Hukum Johannes Kepler",
+        "explanation": "Berdasarkan data observasi teliti dari Tycho Brahe, Johannes Kepler merumuskan tiga hukum empiris pergerakan planet:\n1. Hukum I Kepler (Hukum Lintasan Elips): Setiap planet bergerak mengitari Matahari dalam lintasan berbentuk elips, dengan Matahari berada di salah satu titik fokusnya.\n2. Hukum II Kepler (Hukum Luas Area): Garis khayal yang menghubungkan pusat Matahari dengan planet menyapu luasan juring yang sama dalam selang waktu yang sama. Planet bergerak lebih cepat di titik perihelion (terdekat) dan lebih lambat di titik aphelion (terjauh).\n3. Hukum III Kepler (Hukum Harmonis): Kuadrat dari periode orbit suatu planet sebanding dengan pangkat tiga dari sumbu semi-mayor lintasannya.",
+        "keyPoints": [
+          "Eksentrisitas orbit (e) menentukan kelonjongan elips (0 = lingkaran sempurna, 0 < e < 1 = elips).",
+          "Hukum Newton menyempurnakan Hukum III Kepler dengan memperhitungkan massa gabungan kedua benda: T² = (4π² / G(M₁ + M₂)) × a³."
+        ],
+        "formulaOrFacts": "Hukum III Kepler: T² / a³ = konstan; Hukum Gravitasi Newton: F = G · (m₁ · m₂) / r² (G = 6,674 × 10⁻¹¹ N m²/kg²)."
+      }
+    ],
+    "tags": ["Tata Surya", "Hukum Kepler", "Gravitasi Newton", "Orbit"]
+  },
+  {
+    "id": 3,
+    "number": "BAB 3",
+    "title": "Tata Koordinat Bola Langit",
+    "category": "Astrometri",
+    "summary": "Memahami pemetaan kubah langit menggunakan Sistem Koordinat Horizon (Alt-Azimuth) dan Sistem Koordinat Ekuator.",
+    "sections": [
+      {
+        "title": "Konsep Dasar Bola Langit",
+        "explanation": "Bola langit adalah bola khayal beradius tak terhingga dengan pengamat berada di pusatnya, di mana semua benda langit seolah-olah diproyeksikan pada permukaan dalamnya. Titik tepat tegak lurus di atas kepala pengamat disebut Zenit, sedangkan titik tepat di bawah kaki disebut Nadir. Garis pertemuan antara langit dan permukaan bumi disebut Horizon (Ufuk).",
+        "keyPoints": [
+          "Kutub Langit Utara (KLU) dan Kutub Langit Selatan (KLS) merupakan proyeksi kutub rotasi Bumi ke bola langit.",
+          "Ekuator Langit adalah proyeksi khatulistiwa Bumi ke bola langit, tegak lurus terhadap sumbu rotasi."
+        ],
+        "formulaOrFacts": "Ketinggian Kutub Langit dari horizon selalu sama dengan lintang geografis pengamat (Altitude KLU = Lintang φ)."
+      },
+      {
+        "title": "Sistem Koordinat Horizon & Ekuator",
+        "explanation": "1. Sistem Horizon (Alt-Azimuth): Menggunakan dua parameter lokal:\n- Altitude (h): Ketinggian benda langit dari ufuk (0° di ufuk hingga 90° di zenit).\n- Azimuth (A): Sudut mendatar diukur dari titik Utara ke arah Timur menyusuri ufuk (0° Utara, 90° Timur, 180° Selatan, 270° Barat).\nSistem ini bergantung pada lokasi pengamat dan waktu pengamatan.\n\n2. Sistem Ekuatorial: Bersifat independen dari lokasi pengamat di Bumi:\n- Deklinasi (δ): Jarak sudut dari ekuator langit menuju kutub (-90° hingga +90°).\n- Asensio Rekta (α / RA): Sudut diukur menyusuri ekuator langit ke arah timur dari titik Vernal Equinox (dinyatakan dalam jam, menit, detik: 0h hingga 24h, di mana 1h = 15°).",
+        "keyPoints": [
+          "Sistem Ekuator mirip garis Lintang (Deklinasi) dan Bujur (Asensio Rekta) di peta bumi.",
+          "Titik Aries / Vernal Equinox (♈) adalah perpotongan ekliptika dan ekuator langit saat Matahari bergerak ke belahan langit utara."
+        ],
+        "formulaOrFacts": "Hubungan waktu sideris lokal: LST = RA + HA (Local Sidereal Time = Right Ascension + Hour Angle)."
+      }
+    ],
+    "tags": ["Bola Langit", "Horizon", "Ekuatorial", "Zenit", "Deklinasi"]
+  },
+  {
+    "id": 4,
+    "number": "BAB 4",
+    "title": "Gerak Matahari, Musim & Pengukuran Waktu",
+    "category": "Mekanika Langit",
+    "summary": "Mempelajari gerak semu harian dan tahunan Matahari, kemiringan sumbu rotasi Bumi 23,44°, ekuinoks, solstis, dan persamaan waktu (Equation of Time).",
+    "sections": [
+      {
+        "title": "Gerak Semu Tahunan Matahari & Perubahan Musim",
+        "explanation": "Bumi mengitari Matahari dengan sumbu rotasi yang miring sebesar 23,44° terhadap garis normal bidang orbit (ekliptika). Kemiringan sumbu yang tetap arahnya ini menyebabkan Matahari tampak bergeser bolak-balik antara 23,44° Lintang Utara dan 23,44° Lintang Selatan sepanjang tahun, memicu pergantian empat musim di lintang sedang dan tinggi.",
+        "keyPoints": [
+          "Vernal Equinox (~21 Maret): Matahari berada di ekuator langit bergerak ke utara; panjang siang dan malam sama (12 jam).",
+          "Summer Solstice (~21 Juni): Matahari berada di titik balik utara (+23,5°); belahan bumi utara mengalami siang terpanjang.",
+          "Autumnal Equinox (~23 September): Matahari kembali memotong ekuator langit bergerak ke selatan.",
+          "Winter Solstice (~22 Desember): Matahari berada di titik balik selatan (-23,5°); belahan bumi selatan mengalami puncak musim panas."
+        ],
+        "formulaOrFacts": "Kemiringan sumbu bumi (obliquity of the ecliptic) ε ≈ 23° 26' (23,44°)."
+      },
+      {
+        "title": "Persamaan Waktu (Equation of Time / EoT)",
+        "explanation": "Waktu Matahari Hakiki (Apparent Solar Time) yang ditunjukkan oleh jam bayangan matahari (sundial) tidak berdetak seragam setiap harinya. Perbedaan antara Waktu Matahari Hakiki dan Waktu Matahari Rata-Rata (Mean Solar Time) disebut Persamaan Waktu (Equation of Time / EoT). Penyebab utamanya adalah:\n1. Orbit Bumi berbentuk elips, sehingga kecepatan revolusi Bumi berubah-ubah sesuai Hukum II Kepler.\n2. Kemiringan ekliptika terhadap ekuator langit, sehingga proyeksi kecepatan harian Matahari pada ekuator langit tidak konstan.",
+        "keyPoints": [
+          "Nilai EoT berfluktuasi antara -14,2 menit (sekitar 11 Februari) hingga +16,4 menit (sekitar 3 November).",
+          "Fenomena Analemma adalah kurva angka 8 yang dibentuk posisi Matahari jika difoto pada jam sipil yang persis sama sepanjang satu tahun."
+        ],
+        "formulaOrFacts": "Equation of Time: EoT = Waktu Matahari Nyata - Waktu Matahari Rata-rata."
+      }
+    ],
+    "tags": ["Ekliptika", "Ekuinoks", "Solstis", "Equation of Time", "Musim"]
+  },
+  {
+    "id": 5,
+    "number": "BAB 5",
+    "title": "Bulan, Fase-Fase, dan Fenomena Gerhana",
+    "category": "Tata Surya",
+    "summary": "Analisis gerak orbit Bulan mengelilingi Bumi, siklus fase bulan sinodis vs sideris, serta geometri terjadinya gerhana matahari dan gerhana bulan.",
+    "sections": [
+      {
+        "title": "Periode Sideris vs Sinodis Bulan",
+        "explanation": "Bulan mengorbit Bumi dalam lintasan elips dengan jarak rata-rata 384.400 km. Terdapat dua definisi periode orbit:\n1. Periode Sideris (27,32 hari): Waktu yang dibutuhkan Bulan untuk mengitari Bumi satu putaran penuh 360° relatif terhadap bintang-bintang jauh.\n2. Periode Sinodis (29,53 hari): Waktu yang dibutuhkan Bulan dari satu fase ke fase yang sama berikutnya (misalnya dari Bulan Baru ke Bulan Baru berikutnya). Periode ini lebih lama ~2,2 hari karena saat Bulan mengitari Bumi, Bumi juga bergerak mengitari Matahari, sehingga Bulan harus menempuh sudut tambahan agar kembali segaris dengan Matahari.",
+        "keyPoints": [
+          "Rotasi sinkron (tidal locking) membuat periode rotasi Bulan sama dengan periode revolusinya, sehingga sisi yang sama selalu menghadap Bumi.",
+          "Fase bulan: Bulan Baru (New Moon), Sabit Awal (Waxing Crescent), Kuartir Pertama (First Quarter), Cembung Awal (Waxing Gibbous), Purnama (Full Moon), Cembung Akhir (Waning Gibbous), Kuartir Ketiga, dan Sabit Akhir."
+        ],
+        "formulaOrFacts": "Hubungan periode sinodis (S) dan sideris (P): 1/S = 1/P_Bulan - 1/P_Bumi (1/29,53 ≈ 1/27,32 - 1/365,25)."
+      },
+      {
+        "title": "Mekanisme Gerhana Matahari & Gerhana Bulan",
+        "explanation": "Gerhana tidak terjadi setiap bulan karena bidang orbit Bulan miring sekitar 5,14° terhadap bidang ekliptika (orbit Bumi mengitari Matahari). Gerhana hanya dapat terjadi jika Bulan berada di atau sangat dekat dengan garis simpul (titik potong kedua bidang orbit).\n- Gerhana Matahari: Terjadi saat Bulan Baru ketika Bulan berada tepat di antara Matahari dan Bumi, menutupi piringan Matahari (Total, Cincin, atau Sebagian).\n- Gerhana Bulan: Terjadi saat Bulan Purnama ketika Bumi berada tepat di antara Matahari dan Bulan, sehingga bayangan umbra Bumi jatuh menutupi permukaan Bulan.",
+        "keyPoints": [
+          "Umbra adalah kerucut bayangan inti yang gelap total; Penumbra adalah bayangan kabur di sekitarnya.",
+          "Gerhana Matahari Cincin terjadi saat ukuran semu Bulan lebih kecil daripada Matahari karena Bulan berada di dekat apogee (jarak terjauh)."
+        ],
+        "formulaOrFacts": "Kemiringan bidang orbit Bulan terhadap ekliptika = 5° 9' (5,14°); Siklus Saros gerhana = 18 tahun 11 hari 8 jam."
+      }
+    ],
+    "tags": ["Bulan", "Fase Bulan", "Gerhana Matahari", "Gerhana Bulan", "Umbra"]
+  },
+  {
+    "id": 6,
+    "number": "BAB 6",
+    "title": "Fisika Bintang, Spektroskopi & Diagram H-R",
+    "category": "Astrofisika",
+    "summary": "Memahami karakteristik fisik bintang, skala magnitudo Pogson, klasifikasi spektral OBAFGKM, dan evolusi bintang pada Diagram Hertzsprung-Russell.",
+    "sections": [
+      {
+        "title": "Kecerlangan Bintang & Skala Magnitudo",
+        "explanation": "Kecerlangan bintang diukur menggunakan skala magnitudo yang bersifat logaritmik terbalik (semakin kecil atau negatif nilai magnitudo, semakin terang bintang tersebut). Hipparchus membagi bintang menjadi 6 kelas; Norman Pogson kemudian merumuskannya secara matematis bahwa beda 5 magnitudo setara dengan perbandingan kecerlangan 100 kali lipat.",
+        "keyPoints": [
+          "Magnitudo Semu (m): Kecerlangan bintang sebagaimana tampak dari permukaan Bumi.",
+          "Magnitudo Mutlak (M): Kecerlangan intrinsik bintang jika ditempatkan pada jarak standar 10 parsec (32,6 tahun cahaya).",
+          "Modulus Jarak (m - M) digunakan astronom untuk mengukur jarak bintang dan galaksi."
+        ],
+        "formulaOrFacts": "Formula Pogson: m₁ - m₂ = -2,5 log(b₁ / b₂); Modulus Jarak: m - M = 5 log(d) - 5 (jarak d dalam parsec)."
+      },
+      {
+        "title": "Klasifikasi Spektrum Bintang & Diagram H-R",
+        "explanation": "Bintang memancarkan spektrum kontinu benda hitam yang diselingi garis-garis serapan (Fraunhofer lines) yang menunjukkan komposisi kimia atmosfernya. Annie Jump Cannon mengklasifikasikan bintang berdasarkan suhu fotosfernya menjadi urutan: O, B, A, F, G, K, M (dari terpanas ke terdingin).\nDiagram Hertzsprung-Russell (Diagram H-R) memplotkan Luminositas Bintang terhadap Suhu Efektif (atau Tipe Spektral). Mayoritas bintang (sekitar 90%) berada pada pita Deret Utama (Main Sequence), di mana mereka membakar hidrogen menjadi helium melalui fusi termonuklir.",
+        "keyPoints": [
+          "Kelas Spektral: O (Biru >30.000 K), B (Biru-Putih), A (Putih), F (Kuning-Putih), G (Kuning ~5.800 K seperti Matahari), K (Jingga), M (Merah <3.500 K).",
+          "Evolusi Bintang: Bintang seukuran Matahari akan berevolusi menjadi Raksasa Merah, menghembuskan Planetary Nebula, dan meninggalkan inti Katai Putih.",
+          "Bintang masif (>8 massa matahari) akan meledak dalam Supernova dan meninggalkan Bintang Netron atau Lubang Hitam (Black Hole)."
+        ],
+        "formulaOrFacts": "Hukum Stefan-Boltzmann: Luminositas L = 4π R² σ T⁴; Hukum Pergeseran Wien: λ_maks · T = 2,898 × 10⁻³ m K."
+      }
+    ],
+    "tags": ["Astrofisika", "Magnitudo", "Diagram H-R", "Spektrum Bintang", "Evolusi"]
+  },
+  {
+    "id": 7,
+    "number": "BAB 7",
+    "title": "Bima Sakti, Galaksi & Kosmologi Modern",
+    "category": "Kosmologi",
+    "summary": "Struktur Galaksi Bima Sakti, klasifikasi morfologi galaksi Edwin Hubble, hukum pergeseran merah (Redshift), dan pemuaian alam semesta.",
+    "sections": [
+      {
+        "title": "Galaksi Bima Sakti (Milky Way)",
+        "explanation": "Galaksi kita adalah galaksi spiral berbatang (barred spiral galaxy SBb) berdiameter sekitar 100.000 tahun cahaya yang memuat antara 100 hingga 400 miliar bintang. Komponen utamanya terdiri dari Piringan tipis (berisi lengan-lengan spiral kaya gas dan bintang muda), Tonjolan pusat (Bulge), dan Halo bola (berisi gugus bola tua dan materi gelap / Dark Matter). Di pusat galaksi terletak lubang hitam supermasif bermassa 4,1 juta kali massa matahari yang dinamai Sagittarius A*.",
+        "keyPoints": [
+          "Tata Surya berada di lengan spiral Orion-Cygnus, berjarak sekitar 26.000 tahun cahaya dari pusat galaksi.",
+          "Matahari membutuhkan waktu sekitar 230 juta tahun untuk menyelesaikan satu putaran orbit galaksi (Tahun Kosmik)."
+        ],
+        "formulaOrFacts": "Kurva rotasi galaksi yang mendatar menjadi bukti kuat keberadaan materi gelap (Dark Matter) di alam semesta."
+      },
+      {
+        "title": "Hukum Hubble & Model Alam Semesta Mengembang",
+        "explanation": "Pada tahun 1929, Edwin Hubble mengamati bahwa spektrum cahaya dari galaksi-galaksi jauh mengalami pergeseran merah (redshift), yang menandakan bahwa galaksi-galaksi tersebut bergerak menjauhi kita. Semakin jauh suatu galaksi, semakin cepat kecepatan resesinya. Penemuan ini membuktikan bahwa ruang alam semesta itu sendiri sedang mengembang (expanding universe).",
+        "keyPoints": [
+          "Hukum Hubble: v = H₀ × d, di mana v adalah kecepatan resesi, d adalah jarak galaksi, dan H₀ adalah konstanta Hubble.",
+          "Implikasi pemuaian: Jika waktu ditarik mundur, seluruh materi dan energi alam semesta pernah terkumpul dalam satu titik singularitas padat dan panas tak terhingga (Teori Dentuman Besar / Big Bang sekitar 13,8 miliar tahun lalu).",
+          "Tahun 1998, astronom mengamati supernova tipe Ia dan menemukan bahwa pemuaian alam semesta dipercepat oleh Energi Gelap (Dark Energy) yang menyusun ~68% isi alam semesta."
+        ],
+        "formulaOrFacts": "Konstanta Hubble H₀ ≈ 70 (km/s) / Mpc; Umur alam semesta t ≈ 1 / H₀ ≈ 13,8 miliar tahun."
+      }
+    ],
+    "tags": ["Bima Sakti", "Galaksi", "Hukum Hubble", "Big Bang", "Dark Energy"]
+  },
+  {
+    "id": 8,
+    "number": "BAB 8",
+    "title": "Instrumentasi Astronomi & Teleskop",
+    "category": "Instrumentasi",
+    "summary": "Prinsip kerja optik teleskop astronomi, daya pisah, daya kumpul cahaya, detektor CCD/CMOS modern, serta observatorium gelombang elektromagnetik.",
+    "sections": [
+      {
+        "title": "Prinsip Kerja & Jenis Teleskop Optik",
+        "explanation": "Fungsi utama teleskop astronomi bukanlah memperbesar bayangan, melainkan mengumpulkan cahaya sebanyak mungkin dari objek langit yang redup dan memfokuskannya ke mata atau detektor kamera. Tiga jenis utama teleskop optik:\n1. Teleskop Refraktor: Menggunakan susunan lensa cembung objektif untuk membiaskan cahaya ke titik fokus. Memiliki transmisi kontras tajam, namun rentan mengalami aberasi kromatik (penguraian warna).\n2. Teleskop Reflektor: Menggunakan cermin cekung parabolik sebagai pengumpul cahaya utama (ditemukan oleh Isaac Newton). Bebas dari aberasi kromatik dan dapat dibuat dalam diameter raksasa (hingga 10 meter atau lebih).\n3. Teleskop Katadioptrik: Menggabungkan cermin dan lensa korektor tipis (seperti sistem Schmidt-Cassegrain atau Maksutov-Cassegrain) untuk menghasilkan tabung yang ringkas dengan medan pandang lebar.",
+        "keyPoints": [
+          "Daya Kumpul Cahaya (Light Gathering Power) sebanding dengan kuadrat diameter objektif (LGP ∝ D²).",
+          "Daya Pisah (Resolving Power) adalah kemampuan memisahkan dua objek yang sangat berdekatan, dibatasi oleh difraksi cahaya: θ ≈ 1,22 λ / D.",
+          "Perbesaran sudut teleskop dihitung dari rasio panjang fokus: M = f_objektif / f_okuler."
+        ],
+        "formulaOrFacts": "Kriteria Resolusi Rayleigh: θ = 1,22 · (λ / D) radian; F-ratio = f_objektif / D_objektif."
+      },
+      {
+        "title": "Detektor Modern & Astronomi Multi-Panjang Gelombang",
+        "explanation": "Zaman modern astronomi tidak lagi mengandalkan mata manusia secara langsung, melainkan menggunakan sensor semikonduktor CCD (Charge-Coupled Device) dan CMOS berpendingin cairan untuk merekam foton dengan efisiensi kuantum melebihi 90%. Selain itu, karena atmosfer Bumi menyerap gelombang inframerah, ultraviolet, sinar-X, dan sinar gamma, astronom menempatkan teleskop di luar angkasa (seperti Hubble Space Telescope dan James Webb Space Telescope) untuk menembus debu kosmik dan melihat galaksi-galaksi generasi pertama.",
+        "keyPoints": [
+          "Teleskop Radio (seperti ALMA dan FAST) mengamati molekul dingin antar-bintang dan gelombang sisa Big Bang.",
+          "Teleskop Luar Angkasa James Webb (JWST) beroperasi pada spektrum inframerah untuk mengamati pembentukan bintang dan atmosfer eksoplanet."
+        ],
+        "formulaOrFacts": "Efisiensi Kuantum mata manusia hanya ~1-2%, sedangkan detektor ilmiah CCD mencapai >90%."
+      }
+    ],
+    "tags": ["Teleskop", "Refraktor", "Reflektor", "CCD", "James Webb", "Optik"]
+  },
+  {
+    "id": 9,
+    "number": "BAB 9",
+    "title": "Bintang Ganda, Bintang Variabel & Sisa Bintang",
+    "category": "Astrofisika",
+    "summary": "Mempelajari dinamika sistem bintang ganda untuk penentuan massa bintang, klasifikasi bintang variabel denyut Cepheid sebagai lilin standar jarak kosmik, serta tahapan akhir evolusi: katai putih, bintang neutron, dan pulsar.",
+    "sections": [
+      {
+        "title": "Sistem Bintang Ganda & Penentuan Massa Bintang",
+        "explanation": "Lebih dari separuh bintang di Bima Sakti berada dalam sistem multi-bintang atau bintang ganda (binary star). Sistem bintang ganda merupakan satu-satunya metode langsung bagi astrofisikawan untuk menimbang massa bintang secara akurat menggunakan Hukum III Kepler yang disempurnakan oleh Newton.\nTerdapat empat jenis utama:\n1. Bintang Ganda Visual: Kedua komponen terpisah cukup jauh sehingga dapat diamati dan dibedakan secara langsung melalui teleskop optik.\n2. Bintang Ganda Astrometri: Hanya satu bintang yang tampak bergerak bergoyang (wobble) akibat pengaruh tarikan gravitasi pasangan tak terlihatnya.\n3. Bintang Ganda Spektroskopi: Terdeteksi melalui efek Doppler berkala pada garis-garis spektrumnya (garis tunggal bergeser bolak-balik SB1, atau garis ganda memisah dan menyatu kembali SB2).\n4. Bintang Ganda Gerhana: Bidang orbit bintang sejajar dengan garis pandang pengamat di Bumi, sehingga kedua bintang saling menutupi secara bergantian menghasilkan kurva penurunan kecerlangan fotometrik.",
+        "keyPoints": [
+          "Batas Roche (Roche Lobe) adalah batas daerah gravitasi masing-masing bintang di mana materi gas dapat berpindah ke pasangannya jika salah satu bintang mengembang memenuhi batas tersebut.",
+          "Kurva cahaya bintang ganda gerhana memberikan informasi jari-jari kedua bintang, sudut inklinasi orbit (i), dan rasio suhu permukaannya."
+        ],
+        "formulaOrFacts": "Hukum III Kepler Tergeneralisasi: M₁ + M₂ = a³ / T² (dengan a dalam AU, T dalam tahun, dan massa gabungan dalam satuan Massa Matahari M☉)."
+      },
+      {
+        "title": "Bintang Variabel & Lilin Standar Kosmik",
+        "explanation": "Bintang variabel intrinsik mengalami perubahan kecerlangan akibat denyutan fisik (pulsasi) pada lapisan atmosfernya. Kelompok terpenting adalah Variabel Cepheid Klasik (Populasi I) dan RR Lyrae (Populasi II).\nPada tahun 1908, Henrietta Swan Leavitt menemukan hubungan matematis penting antara Periode Denyutan dan Luminositas (Hubungan Periode-Luminositas Leavitt) pada bintang Cepheid di Awan Magellan. Penemuan ini memungkinkan Cepheid digunakan sebagai 'Lilin Standar' (Standard Candle) untuk mengukur jarak ke galaksi-galaksi tetangga seperti Andromeda, sekaligus menjadi landasan Edwin Hubble membuktikan bahwa alam semesta jauh melampaui batas Bima Sakti.",
+        "keyPoints": [
+          "Mekanisme Kappa (κ-mechanism): Ionisasi parsial helium pada lapisan sub-fotosfer bertindak seperti katup yang menahan dan melepaskan radiasi secara periodik memicu denyut pulsasi bintang.",
+          "Supernova Tipe Ia (ledakan termonuklir katai putih karbon-oksigen saat mencapai batas massa kritis) juga berfungsi sebagai lilin standar jarak kosmologis terjauh."
+        ],
+        "formulaOrFacts": "Hubungan Periode-Luminositas Cepheid: M_V ≈ -2,81 log(P dalam hari) - 1,43."
+      },
+      {
+        "title": "Sisa Akhir Bintang: Katai Putih & Bintang Neutron",
+        "explanation": "Tahapan akhir kehidupan bintang ditentukan sepenuhnya oleh massa awal intinya:\n1. Katai Putih (White Dwarf): Inti karbon-oksigen sisa bintang bermassa rendah-menengah (< 8 M☉). Runtuhnya gravitasi ditahan oleh Tekanan Degenerasi Elektron (Electron Degeneracy Pressure) yang berasal dari Prinsip Larangan Pauli. Subrahmanyan Chandrasekhar membuktikan ada batas massa maksimum sebesar 1,4 massa matahari (Batas Chandrasekhar); jika melebihi batas ini, elektron dipaksa bergabung dengan proton menjadi neutron.\n2. Bintang Neutron & Pulsar: Terbentuk dari inti bintang masif (8–25 M☉) yang runtuh dalam supernova Tipe II. Gravitasi luar biasa ditahan oleh Tekanan Degenerasi Neutron. Berdiameter hanya ~20 km namun bermassa ~1,4–2,1 M☉ (densitas mencapai 10¹⁴ g/cm³). Bintang neutron yang berputar cepat dengan medan magnet raksasa memancarkan berkas gelombang elektromagnetik dari kutub magnetnya yang terdeteksi sebagai kedipan berkala (Pulsar, ditemukan oleh Jocelyn Bell Burnell tahun 1967).",
+        "keyPoints": [
+          "Batas Chandrasekhar = 1,44 M☉ (Batas massa maksimum stabilitas katai putih).",
+          "Batas Tolman-Oppenheimer-Volkoff (TOV) ≈ 2,17 M☉ (Batas massa maksimum kestabilan bintang neutron).",
+          "Magnetar adalah varian bintang neutron dengan medan magnet terkuat di alam semesta (mencapai 10¹¹ Tesla)."
+        ],
+        "formulaOrFacts": "Batas Chandrasekhar: M_Ch ≈ 1,44 M☉; Batas TOV bintang neutron: M_TOV ≈ 2,1–2,3 M☉."
+      }
+    ],
+    "tags": ["Bintang Ganda", "Cepheid", "Lilin Standar", "Katai Putih", "Bintang Neutron", "Pulsar"]
+  },
+  {
+    "id": 10,
+    "number": "BAB 10",
+    "title": "Relativitas Umum & Lubang Hitam",
+    "category": "Relativitas & Lubang Hitam",
+    "summary": "Evolusi konsep gravitasi dari Newton ke Relativitas Umum Einstein, kelengkungan ruang-waktu, dilatasi waktu gravitasi, geometri lubang hitam Schwarzschild dan Kerr, serta radiasi termal Hawking.",
+    "sections": [
+      {
+        "title": "Prinsip Ekuivalensi & Kelengkungan Ruang-Waktu",
+        "explanation": "Pada tahun 1915, Albert Einstein merumuskan Teori Relativitas Umum yang merevolusi pemahaman tentang gravitasi. Gravitasi bukanlah gaya tarik gaib jarak jauh seperti dalam pandangan mekanika Newton klasik, melainkan perwujudan dari kelengkungan ruang-waktu (spacetime curvature) 4-dimensi yang disebabkan oleh keberadaan massa dan energi.\nPrinsip Ekuivalensi menyatakan bahwa percepatan inersia lokal tidak dapat dibedakan dari medan gravitasi lokal. Implikasi fisis yang telah diverifikasi secara eksperimental meliputi:\n1. Pembelokan Cahaya (Gravitational Lensing): Foton tak bermassa tetap melintasi garis geodesik ruang-waktu yang melengkung di sekitar objek masif (dibuktikan oleh Arthur Eddington pada gerhana matahari 1919).\n2. Dilatasi Waktu Gravitasi: Waktu berdetak lebih lambat di wilayah dengan potensi gravitasi lebih kuat.\n3. Pergeseran Merah Gravitasi (Gravitational Redshift): Foton yang merambat keluar dari medan gravitasi kehilangan energi sehingga panjang gelombangnya meregang ke arah merah.",
+        "keyPoints": [
+          "Persamaan Medan Einstein: G_μν + Λ g_μν = (8πG / c⁴) T_μν ('Materi memberi tahu ruang-waktu bagaimana melengkung, dan ruang-waktu memberi tahu materi bagaimana bergerak' - John Wheeler).",
+          "Koreksi relativitas umum wajib dihitung pada konstelasi satelit navigasi GPS/GLONASS agar akurasi posisi tidak bergeser ~10 km per hari."
+        ],
+        "formulaOrFacts": "Radius pembelokan cahaya Eddington: θ = 4GM / (c² R); Dilatasi waktu gravitasi: Δt_f = Δt₀ / √(1 - 2GM / rc²)."
+      },
+      {
+        "title": "Fisika Lubang Hitam & Cakrawala Peristiwa",
+        "explanation": "Jika inti bintang masif yang mati melebihi Batas Tolman-Oppenheimer-Volkoff (> 2,2 M☉), tidak ada gaya fundamental di alam semesta yang mampu menahan keruntuhan gravitasi. Objek terus memampat hingga ke titik berdensitas dan kelengkungan tak hingga yang disebut Singularitas Gravitasi.\nBatas bola di mana kecepatan lepas (escape velocity) sama persis dengan kecepatan cahaya disebut Cakrawala Peristiwa (Event Horizon). Apapun yang melewati batas ini—termasuk cahaya—tidak akan pernah bisa kembali.\nKarl Schwarzschild memecahkan solusi eksak pertama persamaan medan Einstein untuk lubang hitam statis tak bermuatan (Schwarzschild Black Hole). Roy Kerr kemudian merumuskan solusi untuk lubang hitam berotasi (Kerr Black Hole) yang memiliki daerah pusaran seretan ruang-waktu (frame-dragging) aktif bernama Ergosfer.",
+        "keyPoints": [
+          "Jari-jari Schwarzschild (R_s) adalah radius batas Event Horizon: R_s = 2GM / c².",
+          "Teorema Tanpa Rambut (No-Hair Theorem): Lubang hitam hanya dicirikan oleh 3 parameter fisik: Massa (M), Muatan Listrik (Q), dan Momentum Sudut (J).",
+          "Efek Spaghettifikasi: Gaya pasang surut gravitasi ekstrem yang meregangkan objek secara vertikal dan meremasnya secara horizontal saat mendekati singularitas."
+        ],
+        "formulaOrFacts": "Radius Schwarzschild: R_s = 2GM / c² (Untuk Matahari R_s ≈ 2,95 km; untuk Bumi R_s ≈ 8,87 mm)."
+      },
+      {
+        "title": "Termodinamika Lubang Hitam, Radiasi Hawking & Citra EHT",
+        "explanation": "Pada dekade 1970-an, Stephen Hawking dan Jacob Bekenstein menemukan bahwa lubang hitam tidak sepenuhnya 'hitam'. Akibat efek mekanika kuantum di dekat batas cakrawala peristiwa, fluktuasi vakum memproduksi pasangan partikel-antipartikel virtual. Jika salah satu partikel tersedot ke dalam cakrawala sementara pasangannya lolos ke luar angkasa, lubang hitam kehilangan massa bersih. Emisi radiasi termal berenergi rendah ini disebut Radiasi Hawking (Hawking Radiation).\nPada April 2019, kolaborasi teleskop Event Horizon Telescope (EHT) berhasil mengabadikan citra bayangan pertama cakrawala peristiwa lubang hitam supermasif di pusat galaksi Messier 87 (M87* berjarak 55 juta tahun cahaya), disusul oleh citra Sagittarius A* di pusat Bima Sakti pada Mei 2022.",
+        "keyPoints": [
+          "Suhu radiasi Hawking berbanding terbalik dengan massa lubang hitam: T_H = ħ c³ / (8π G M k_B). Semakin kecil massa lubang hitam, semakin panas dan cepat ia menguap.",
+          "Entropi Lubang Hitam sebanding dengan luas penampang cakrawala peristiwanya: S_BH = k_B c³ A / (4 G ħ).",
+          "Observatorium Gelombang Gravitasi LIGO-Virgo-KAGRA telah mencatat ratusan peristiwa merger biner lubang hitam dan bintang neutron."
+        ],
+        "formulaOrFacts": "Suhu Hawking: T_H ∝ 1 / M; Entropi Bekenstein-Hawking: S = k_B A / (4 ℓ_P²)."
+      }
+    ],
+    "tags": ["Relativitas Umum", "Lubang Hitam", "Event Horizon", "Schwarzschild", "Radiasi Hawking", "EHT"]
+  },
+  {
+    "id": 11,
+    "number": "BAB 11",
+    "title": "Struktur Skala Besar, Materi Gelap & Energi Gelap",
+    "category": "Kosmologi",
+    "summary": "Arsitektur jaring kosmik alam semesta (Cosmic Web), fluktuasi anisotropi Radiasi Latar Belakang Kosmik (CMB), dan neraca kosmik materi gelap serta energi gelap.",
+    "sections": [
+      {
+        "title": "Jaring Kosmik (The Cosmic Web) & Distribusi Materi",
+        "explanation": "Pada skala terbesar (ratusan juta parsec), alam semesta tidak homogen sempurna melainkan tersusun dalam struktur sarang lebah raksasa yang disebut Jaring Kosmik (Cosmic Web). Struktur megah ini terdiri dari:\n1. Filamen Galaksi: Jalinan benang-benang raksasa berisi miliaran galaksi dan gas intergalaktik hangat-panas (WHIM).\n2. Titik Simpul (Nodes): Pertemuan filamen di mana berkumpul gugus galaksi (galaxy clusters) masif berisi ribuan galaksi dan gas pemancar sinar-X.\n3. Void Kosmik: Rongga-rongga hampa raksasa berdiameter puluhan megaparsec dengan kerapatan materi sangat rendah.\n4. Supergugus Galaksi: Struktur terikat gravitasi berskala luas seperti Supergugus Laniakea, di mana Bima Sakti dan Grup Lokal berdiam.",
+        "keyPoints": [
+          "Prinsip Kosmologi: Pada skala cukup besar (>100 Mpc), alam semesta bersifat homogen (seragam di setiap lokasi) dan isotropis (sama ke segala arah pengamatan).",
+          "Survei pergeseran merah skala besar (seperti SDSS - Sloan Digital Sky Survey) mengonfirmasi struktur tiga dimensi jaring filamen kosmik ini."
+        ],
+        "formulaOrFacts": "Grup Lokal beranggotakan Galaksi Bima Sakti, Andromeda (M31), Triangulum (M33), dan ~50 galaksi kerdil dalam radius ~3 juta tahun cahaya."
+      },
+      {
+        "title": "Radiasi Latar Belakang Kosmik (Cosmic Microwave Background / CMB)",
+        "explanation": "Sekitar 380.000 tahun setelah Dentuman Besar (Big Bang), suhu alam semesta mendingin hingga ~3.000 Kelvin, memungkinkan proton menangkap elektron membentuk atom hidrogen netral pertama (Era Rekombinasi). Foton yang sebelumnya terperangkap dalam hamburan Thomson elektron bebas akhirnya terbebas merambat ke segala arah (Era Foton Decoupling).\nFoton-foton purba ini terus mengalami pergeseran merah akibat pemuaian alam semesta hingga kini teramati sebagai radiasi gelombang mikro bersuhu seragam 2,725 Kelvin di seluruh penjuru langit. Ditemukan secara empiris oleh Arno Penzias dan Robert Wilson pada tahun 1965.",
+        "keyPoints": [
+          "Observatorium luar angkasa COBE, WMAP, dan Planck memetakan fluktuasi suhu anisotropi CMB pada ketelitian satu per 100.000 (ΔT/T ~ 10⁻⁵).",
+          "Riak-riak kecil pada suhu CMB mencerminkan benih fluktuasi densitas gravitasi purba yang kelak tumbuh menjadi gugus galaksi dan bintang di masa modern."
+        ],
+        "formulaOrFacts": "Suhu radiasi CMB saat ini T₀ = 2,7255 ± 0,0006 K; Spektrum CMB mengikuti kurva radiasi benda hitam sempurna Planck."
+      },
+      {
+        "title": "Materi Gelap (Dark Matter) & Energi Gelap (Dark Energy)",
+        "explanation": "Pengamatan kosmologi presisi menghasilkan neraca massa-energi total alam semesta yang mencengangkan (Model Standar Kosmologi Lambda-CDM / ΛCDM):\n1. Materi Biasa (Barionik): Hanya menyusun ~4,9% dari total alam semesta (semua bintang, planet, gas, debu, dan materi biologis).\n2. Materi Gelap (Dark Matter): Menyusun ~26,8% alam semesta. Bersifat tidak memancarkan, menyerap, atau memantulkan radiasi elektromagnetik. Keberadaannya dibuktikan melalui anomali kurva rotasi galaksi (kecepatan bintang di tepi luar galaksi tetap konstan, dibuktikan oleh Vera Rubin) dan pemisahan materi pada Lensa Gravitasi Gugus Peluru (Bullet Cluster).\n3. Energi Gelap (Dark Energy): Menyusun porsi terbesar ~68,3% alam semesta. Berupa tekanan negatif homogen yang merentangkan ruang kosmik dan menyebabkan pemuaian alam semesta dipercepat (accelerating expansion).",
+        "keyPoints": [
+          "Kandidat partikel Dark Matter mencakup partikel hipotetis interaksi lemah WIMP (Weakly Interacting Massive Particles) dan Axion.",
+          "Konstanta Kosmologis Einstein (Λ) diposisikan sebagai representasi kerapatan energi vakum dari Energi Gelap.",
+          "Skenario masa depan alam semesta: Big Freeze / Heat Death di mana bintang-bintang kehabisan bahan bakar di alam semesta yang terus mendingin dan meregang selamanya."
+        ],
+        "formulaOrFacts": "Komposisi Alam Semesta: 68,3% Dark Energy + 26,8% Dark Matter + 4,9% Materi Biasa; Parameter kerapatan total Ω_total ≈ 1,00 (Geometri alam semesta datar)."
+      }
+    ],
+    "tags": ["Cosmic Web", "CMB", "Materi Gelap", "Energi Gelap", "Lambda-CDM", "Big Bang"]
+  },
+  {
+    "id": 12,
+    "number": "BAB 12",
+    "title": "Eksoplanet, Astrobiologi & Kehidupan Ekstraterestrial",
+    "category": "Eksoplanet & Astrobiologi",
+    "summary": "Metodologi penemuan planet di luar tata surya, spektroskopi atmosfer eksoplanet, kriteria Zona Layak Huni (Habitable Zone), astrobiologi, dan Persamaan Drake.",
+    "sections": [
+      {
+        "title": "Metodologi Deteksi Planet Ekstrasurya (Eksoplanet)",
+        "explanation": "Planet ekstrasurya (eksoplanet) adalah planet yang mengorbit bintang selain Matahari kita. Eksoplanet pertama di sekitar bintang deret utama (51 Pegasi b) ditemukan pada tahun 1995 oleh Michel Mayor dan Didier Queloz (peraih Hadiah Nobel Fisika 2019). Hingga kini ribuan eksoplanet telah terkonfirmasi menggunakan beberapa metode fisika mutakhir:\n1. Metode Kecepatan Radial (Doppler Wobble): Mengukur pergeseran Doppler periodik pada garis absorpsi bintang induk akibat goyangan gravitasi bersama pusat massa sistem (Barycenter).\n2. Metode Transit Fotometrik: Mengukur sedikit penurunan berkala intensitas cahaya bintang ketika sebuah planet melintas tepat di depan piringan bintang relatif terhadap pengamat (digunakan secara masif oleh teleskop Kepler dan TESS).\n3. Metode Lensa Mikro Gravitasi (Gravitational Microlensing): Medan gravitasi sistem bintang-planet membelokkan dan memperbesar cahaya bintang latar belakang yang melintas di belakangnya.\n4. Pencitraan Langsung (Direct Imaging): Menggunakan instrumen koronagraf untuk meredam silau cahaya bintang induk sehingga radiasi inframerah planet muda yang panas dapat ditangkap sensor teleskop.",
+        "keyPoints": [
+          "Kedalaman transit (transit depth) ΔF / F berhubungan langsung dengan rasio kuadrat radius: ΔF / F = (R_planet / R_bintang)².",
+          "Klasifikasi eksoplanet meliputi: Hot Jupiter (raksasa gas bersuhu tinggi sangat dekat dengan bintang induk), Super-Earth (planet berbatu bermassa 1,5–10 massa bumi), dan Mini-Neptunus."
+        ],
+        "formulaOrFacts": "Kedalaman transit: ΔL / L ≈ (R_p / R_*)²; Kecepatan radial semi-amplitudo K ∝ M_p · sin(i) / (M_* + M_p)^(2/3)."
+      },
+      {
+        "title": "Zona Layak Huni (Habitable Zone) & Astrobiologi",
+        "explanation": "Astrobiologi adalah cabang ilmu multidisipliner yang mempelajari asal-usul, evolusi, distribusi, dan masa depan kehidupan di alam semesta. Kriteria utama pencarian dunia layak huni berpusat pada Zona Layak Huni (Circumstellar Habitable Zone / Zona Goldilocks), yaitu wilayah di sekitar bintang di mana suhu permukaan planet memungkinkan air berwujud cair tetap stabil pada tekanan atmosfer tertentu.\nDalam spektroskopi transmisi eksoplanet (seperti yang dilakukan oleh Teleskop Luar Angkasa James Webb), astronom mencari tanda-tanda kimia atmosfer yang disebut Biosignature (seperti uap air H₂O, metana CH₄, ozon O₃, karbon dioksida CO₂, dan molekul organik kompleks lainnya yang berada dalam kondisi ketidakseimbangan kimiawi dinamis).",
+        "keyPoints": [
+          "Batas jarak Zona Layak Huni ditentukan oleh luminositas bintang induk: R_in, R_out ∝ √L_*.",
+          "Target astrobiologi dalam Tata Surya kita meliputi lingkungan samudra bawah lapisan es di bulan Europa (Jupiter) dan Enceladus (Saturnus), serta danau hidrokarbon metana di Titan.",
+          "Organisme Ekstremofil di Bumi (mikroba yang bertahan di lingkungan asam pekat, radiasi radioaktif tinggi, dan dasar palung laut hidrotermal bersuhu >300°C) membuktikan ketahanan kehidupan di habitat ekstrem kosmis."
+        ],
+        "formulaOrFacts": "Jarak perkiraan Zona Layak Huni: d_HZ ≈ √(L_* / L_☉) Satuan Astronomi (AU)."
+      },
+      {
+        "title": "Persamaan Drake & Paradoks Fermi",
+        "explanation": "Pada tahun 1961, astrofisikawan Frank Drake merumuskan argumen probabilitas matematis untuk menaksir jumlah peradaban cerdas yang mampu berkomunikasi di galaksi Bima Sakti kita (Persamaan Drake):\nN = R* × f_p × n_e × f_l × f_i × f_c × L\ndi mana R* adalah laju pembentukan bintang per tahun, f_p fraksi bintang dengan sistem planet, n_e jumlah planet ramah kehidupan per sistem, f_l fraksi yang memunculkan kehidupan biologis, f_i fraksi yang berevolusi menjadi makhluk cerdas, f_c fraksi yang mengembangkan teknologi transmisi radio antarbintang, dan L adalah durasi bertahan hidup rata-rata peradaban tersebut.\nNamun jika galaksi kita berumur lebih dari 10 miliar tahun dan memuat ratusan miliar bintang, mengapa kita belum pernah menerima sinyal atau bukti kehadiran peradaban asing? Pertanyaan kontradiktif ini dikenal sebagai Paradoks Fermi ('Where is everybody?' - Enrico Fermi 1950).",
+        "keyPoints": [
+          "Resolusi Paradoks Fermi mencakup hipotesis 'Great Filter' (adanya dinding rintangan evolusi yang mustahil ditembus spesies biologis), Hipotesis Kebun Binatang / Zoo Hypothesis, atau keterbatasan jangkauan sinyal cahaya dalam ruang waktu kosmik.",
+          "Proyek SETI (Search for Extraterrestrial Intelligence) memindai frekuensi radio alami (termasuk garis hidrogen netral 21 cm / 1420 MHz yang dikenal sebagai 'Water Hole') untuk mendeteksi transmisi buatan antarbintang."
+        ],
+        "formulaOrFacts": "Persamaan Drake: N = R* · f_p · n_e · f_l · f_i · f_c · L; Frekuensi Water Hole netral hidrogen H-I = 1.420,405 MHz (λ = 21,1 cm)."
+      }
+    ],
+    "tags": ["Eksoplanet", "Transit Kepler", "Habitable Zone", "Astrobiologi", "Persamaan Drake", "Fermi Paradox"]
+  }
+]
+

@@ -1,0 +1,21 @@
+{
+  "name": "arahku-web",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Arahku - Jadwal Shalat, Arah Kiblat, Panduan Shalat 5 Waktu & Buku Astronomi (Prodi Tadris Fisika UIN Jakarta)",
+  "scripts": {
+    "build": "mkdir -p public dist && cp -r index.html assets public/ && cp -r index.html assets dist/"
+  },
+  "keywords": [
+    "arahku",
+    "jadwal-shalat",
+    "arah-kiblat",
+    "panduan-shalat",
+    "astronomi",
+    "dzikir",
+    "uin-jakarta",
+    "tadris-fisika"
+  ],
+  "author": "Prodi Tadris Fisika UIN Syarif Hidayatullah Jakarta",
+  "license": "MIT"
+}
