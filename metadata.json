@@ -1,0 +1,6 @@
+{
+  "name": "Arahku",
+  "description": "Arahku: Aplikasi Jadwal Shalat Offline, Panduan Shalat 5 Waktu Lengkap (Mozaik Inilah.com), Arah Kiblat, Doa Harian, Dzikir Pagi Petang & Sebelum Tidur, serta Buku Astronomi. Prodi Tadris Fisika UIN Jakarta.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
